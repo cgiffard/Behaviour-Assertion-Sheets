@@ -1,7 +1,7 @@
 {
-  "name": "TestBehaviourSheets",
-  "version": "0.0.0",
-  "description": "Stylesheet-like syntax for required behaviour.",
+  "name": "bas",
+  "version": "0.0.1",
+  "description": "Behaviour Assertion Sheets: Stylesheet-like syntax for required behaviour.",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec"
@@ -19,6 +19,7 @@
   "dependencies": {
     "commander": "~1.1.1",
     "simplecrawler": "~0.1.6",
-    "csstree": "0.0.1"
+    "csstree": "0.0.1",
+    "request": "~2.16.6"
   }
 }

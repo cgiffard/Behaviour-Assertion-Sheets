@@ -32,6 +32,7 @@
 	
 }
 
+/*@ Validate every page and set up some sensible expectations */
 @all {
 	
 	validate-html: 5;
