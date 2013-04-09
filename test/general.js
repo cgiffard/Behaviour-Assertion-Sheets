@@ -18,7 +18,13 @@ describe("General BAS API",function() {
 		
 		testSuite
 			.loadSheet(__dirname + "/sheets/general.bas")
-				.yep(done);
+				.yep(function() {
+					
+					testSuite.rules.length.should.equal(3);
+					testSuite.rules.last.should.be.an("object");
+					
+					done();
+				});
 	});
 	
-})
+});
