@@ -1,0 +1,24 @@
+{
+  "name": "TestBehaviourSheets",
+  "version": "0.0.0",
+  "description": "Stylesheet-like syntax for required behaviour.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": "",
+  "keywords": [
+    "test",
+    "css",
+    "behaviour",
+    "integration",
+    "testing"
+  ],
+  "author": "Christopher Giffard <christopher.giffard@cgiffard.com>",
+  "license": "BSD",
+  "dependencies": {
+    "commander": "~1.1.1",
+    "simplecrawler": "~0.1.6",
+    "csstree": "0.0.1"
+  }
+}
