@@ -25,6 +25,7 @@
     "simplecrawler": "~0.1.6",
     "csstree": "0.0.1",
     "request": "~2.16.6",
-    "yoyaku": "0.0.10"
+    "yoyaku": "0.0.12",
+    "cheerio": "~0.10.8"
   }
 }

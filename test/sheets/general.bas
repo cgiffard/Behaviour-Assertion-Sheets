@@ -10,7 +10,7 @@
 	
 	h1 + .logo {
 		has-attribute: "user-id";
-		attribute-value["user-id"]: exists, greater-than(1);
+		attribute-value::user-id: exists, greater-than(1);
 	}
 	
 	
