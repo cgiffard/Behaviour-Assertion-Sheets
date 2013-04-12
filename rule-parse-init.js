@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var request = require("request"),
 	BAS = require("./"),
 	testSuite = new BAS();

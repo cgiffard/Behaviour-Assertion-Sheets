@@ -7,3 +7,7 @@
 	}
 	
 }
+
+@page (title =~ /github/i) {
+	
+}
