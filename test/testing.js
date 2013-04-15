@@ -14,11 +14,15 @@ describe("Test runner",function() {
 		var BAS = require("../"),
 			testSuite = new BAS();
 		
-		// With Yoyaku
+		// req.defer(url)
+		// 	.yep(testSuite.run.curry(3,url)
+		// 			.yep(done));
 		
 		req.defer(url)
-			.yep(testSuite.run.curry(3,url)
-					.yep(done));
+			.yep(function(req,data) {
+				testSuite.run(url,req,data)
+					.yep(done);
+			});
 		
 		testSuite
 			.loadSheet(__dirname + "/sheets/github.bas")

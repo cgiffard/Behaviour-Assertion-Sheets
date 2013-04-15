@@ -28,7 +28,7 @@ describe("General BAS API",function() {
 			.loadSheet(__dirname + "/sheets/general.bas")
 				.yep(function() {
 					
-					testSuite.rules.length.should.equal(3);
+					testSuite.rules.length.should.equal(9);
 					testSuite.rules.last.should.be.an("object");
 					
 					done();

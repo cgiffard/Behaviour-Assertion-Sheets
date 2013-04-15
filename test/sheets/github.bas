@@ -8,6 +8,6 @@
 	
 }
 
-@page (title =~ /github/i) {
+@page (title =~ /github/i) (domain = github.com) {
 	
 }
