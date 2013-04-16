@@ -28,11 +28,14 @@ testSuite.on("startgroup",function(rule) {
 });
 
 testSuite.on("testassertion",function(assertion) {
-	console.log("Testing assertion ",assertion);
+	console.log("Testing assertion " + assertion);
 });
 
-testSuite.on("assertionfailed",function(assertion) {
-	console.log("Assertion failed: ",assertion);
+testSuite.on("assertionfailed",function(errors,assertion) {
+	console.error("Assertion failed: " + assertion);
+	errors.forEach(function(error) {
+		console.error("\t" + error);
+	})
 });
 
 testSuite.on("end",function() {
