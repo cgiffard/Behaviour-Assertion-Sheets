@@ -5,12 +5,12 @@
 	h1 {
 		count: 1;
 		exists: true;
-		contains: "My site";
+		text: contains("My site");
 	}
 	
 	h1 + .logo {
 		has-attribute: "user-id";
-		attribute-value(user-id): exists, greater-than(1);
+		attribute-value(user-id): exists, gt(1);
 	}
 	
 	
@@ -68,7 +68,7 @@
 	validate-html: 5;
 	
 	img {
-		has-attribute: "alt";
-		attribute-value(alt): /.+/i;
+		attribute(alt): exists;
+		attribute(alt): /.+/i;
 	}
 }
