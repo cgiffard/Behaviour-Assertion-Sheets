@@ -24,17 +24,21 @@ testSuite.on("testregistered",function(name,func) {
 });
 
 testSuite.on("startgroup",function(rule) {
-	console.log("Starting test group: ",rule);
+	console.log("Starting test group: " + rule);
+});
+
+testSuite.on("selector",function(selector) {
+	console.log("\tTesting selector " + selector);
 });
 
 testSuite.on("testassertion",function(assertion) {
-	console.log("Testing assertion " + assertion);
+	console.log("\t\tTesting assertion " + assertion);
 });
 
 testSuite.on("assertionfailed",function(errors,assertion) {
-	console.error("Assertion failed: " + assertion);
+	console.error("\t\tAssertion failed: " + assertion);
 	errors.forEach(function(error) {
-		console.error("\t" + error);
+		console.error("\t\t\t" + error);
 	})
 });
 
