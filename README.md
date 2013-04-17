@@ -13,9 +13,10 @@ You could:
 *	Monitor for service availability and downtime
 *	Integration testing and integrity verification
 *	Use BAS inside of an existing test framework like Mocha to verify output,
-	or even as reporting middleware inside express
+	or even as reporting middleware inside your express application
 
-Anybody who has ever used CSS can use Bas - the syntax is easy and familiar.
+Anybody who has ever used CSS can use Bas - the [syntax is easy and familiar.]
+(#sheet-syntax)
 
 ## Installing
 
@@ -24,8 +25,9 @@ Then just use npm to install Bas:
 
 	npm install -g bas
 	
-Installing globally (`-g`) makes a CLI tool available for working with Bas sheets.
-If you don't install globally you can still use Bas via the node.js API.
+Installing globally (`-g`) makes a [CLI tool](#bas-on-the-command-line) available
+for working with Bas sheets. If you don't install globally you can still use Bas
+via the [node.js API](#bas-node-js-api).
 
 ## Sheet Syntax
 
@@ -58,6 +60,7 @@ If you don't install globally you can still use Bas via the node.js API.
 
 *	Asynchronous test support
 *	Comprehensive test suite
+*	Very solid cleanup
 
 ## Testing
 
