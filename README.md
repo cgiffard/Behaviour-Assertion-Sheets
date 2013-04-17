@@ -414,7 +414,83 @@ get a list of options by typing `bas -h` at the prompt.)
 
 ## Bas Node.js API
 
+### Overview
+
+The Bas API is extremely straightforward. To get started, simply require it:
+
+	var BAS = require("bas");
+
+Create yourself a new BAS test suite like so:
+
+	var testSuite = new BAS();
+
+Load in a Bas sheet (you can also supply a buffer if you'd prefer.)
+	
+	testSuite.loadSheet("./mysheet.bas");
+	
+Then fetch a resiyrce (in this case, we're using [request](http://npm.im/request))
+and run the test suite against it. You'll need to pass in a URL and response object
+as well as the page data.
+
+	request("http://example.com",function(err,res,body) {
+		if (err) throw err;
+		
+		testSuite.run(url,res,data);
+	});
+	
+The test suite runs asynchronously, and [emits events](#events) so you can know
+when errors have occurred, assertions have been tested, or that the suite has
+completed.
+
+We can listen to one of these events to 
+
+### Class Reference
+
+	new BAS( ... options ...  { continueOnParseFail });
+	
+	BAS {
+	
+		errors [ ... ] {
+			.clear()
+		}
+	
+		tests { "test" : func  ... }
+		errors [ assertionerr ]
+		rules [ ruleset, rulset ]
+	
+		stats {
+			testCount
+			pagesTested
+			tetsRun
+		}
+	}
+	
+	BAS.prototype.loadSheet = yoyaku.yepnope(function(sheet (buffer or string),promises)
+	BAS.prototype.registerTest = function(name,func)
+	BAS.prototype.run = yoyaku.yepnope(function(url,res,data,promises)
+	
+	var documentState = {
+		"url": url,
+		"res": res,
+		"data": data,
+		"document": $,
+		"tests": self.tests
+	};
+	
+	documentState,self.tests
+
 ### Events
+
+	bas.emit("loadsheet");
+	this.emit("testregistered",name,func);
+	this.emit("start",url);
+	self.emit("parserror",parseError);
+	self.emit("assertion",assertion,node);
+	self.emit("assertionsuccess",assertion,node);
+	self.emit("assertionfailed",assertionErr,assertion);
+	self.emit("selector",selector,nodes);
+	self.emit("startgroup",rule);
+	this.emit("end",url,this.errors);
 
 ## Roadmap
 
@@ -424,6 +500,7 @@ get a list of options by typing `bas -h` at the prompt.)
 *	Comprehensive test suite
 *	Very solid cleanup
 *	Load in HTML/XML to test against from disk using `bas` CLI tool
+*	Lots more test functions (for conditions and assertions)
 
 #### Further down the road
 
