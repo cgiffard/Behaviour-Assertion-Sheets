@@ -12,7 +12,12 @@
     "css",
     "behaviour",
     "integration",
-    "testing"
+    "testing",
+    "declarative",
+    "client-side",
+    "crawl",
+    "crawler",
+    "assertion"
   ],
   "author": "Christopher Giffard <christopher.giffard@cgiffard.com>",
   "license": "BSD",
