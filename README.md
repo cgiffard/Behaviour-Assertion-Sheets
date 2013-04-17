@@ -20,6 +20,8 @@ You could:
 Anybody who has ever used CSS can use Bas - the [syntax is easy and familiar.]
 (#sheet-syntax)
 
+**Warning: This is an alpha-ish release. There might be bugs. Sorry!**
+
 ## Installing
 
 This first implementation of Bas is built with [node.js](http://nodejs.org), so
@@ -479,24 +481,32 @@ test suite, loading in a blank document? Or bail out?
 
 #### `BAS.tests` *property*
 
-tests { "test" : func  ... }
+Getter: Returns an object map of functions corresponding to [tests](#tests.)
 
 #### `BAS.errors` *property*
 
-errors [ ... ] {
-	.clear()
-}
+Getter: returns an array of assertion errors (Error instances) if any were thrown
+during the previous test run.
+
+Each error has the following (some additional) properties:
+	
+*	`message` (string - the error message.)
+*	`selector` (string - if available, the selector that triggered the current
+	assertion.)
+*	`nodePath` (string - a generated, unambiguous CSS selector path to the current node.)
+*	`url` (string - the url of the page that triggered this assertion.)
+
+The list of errors may also be cleared with `BAS.errors.clear()`.
 
 #### `BAS.rules` *property*
 
-rules [ ruleset, rulset ]
+An array of ruleset objects. (Better documentation coming soon!)
 
 #### `BAS.stats` *property*
-stats {
-	testCount
-	pagesTested
-	tetsRun
-}
+
+Returns an object containing statistics about past test runs.
+
+This should be considered **unstable** and undocumented. It is about to change.
 
 #### `BAS.loadSheet` (buffer sheetData | string filePath)
 
@@ -537,6 +547,7 @@ BAS.prototype.run = yoyaku.yepnope(function(url,res,data,promises)
 
 #### Next Version
 
+*	Better documentation for rulesets, assertions, selector objects
 *	Asynchronous test support
 *	Comprehensive test suite
 *	Very solid cleanup
