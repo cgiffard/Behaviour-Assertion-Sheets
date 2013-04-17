@@ -479,6 +479,9 @@ object, with the following possible keys:
 Should Cheerio fail to parse the HTML document, should Bas continue with the
 test suite, loading in a blank document? Or bail out?
 
+BAS is an instance of node EventEmitter and implements the `on` and `emit` methods,
+not described here.
+
 #### `BAS.tests` *property*
 
 Getter: Returns an object map of functions corresponding to [tests](#tests.)
@@ -500,48 +503,74 @@ The list of errors may also be cleared with `BAS.errors.clear()`.
 
 #### `BAS.rules` *property*
 
-An array of ruleset objects. (Better documentation coming soon!)
+Getter: An array of ruleset objects. (Better documentation for these coming soon!)
 
 #### `BAS.stats` *property*
 
-Returns an object containing statistics about past test runs.
+Getter: Returns an object containing statistics about past test runs.
 
 This should be considered **unstable** and undocumented. It is about to change.
 
 #### `BAS.loadSheet` (buffer sheetData | string filePath)
 
-BAS.prototype.loadSheet = yoyaku.yepnope(function(sheet (buffer or string),promises)
+If given a buffer, this function will not touch the filesystem - it simply parses the
+data it receives immediately.
+
+If given a filepath, asynchronously loads the entire file off disk, and parses
+it - adding the processed rules to the test suite object.
+
+These rules can be accessed via [`BAS.rules`](#basrules-property).
+
+This function returns an object with promise handlers: `yep` for success, and `nope`
+for failure. See the [yoyaku](http://github.com/cgiffard/yoyaku) documentation for
+more information.
 
 #### `BAS.registerTest`(string testName, function test)
 
-BAS.prototype.registerTest = function(name,func)
+Registers a test in the `BAS.test` object map - and makes it available to Bas
+sheets to use in conditions and assertion subjects.
 
 #### `BAS.run` (string URL, object HTTPResponse, string Data)
-	
-BAS.prototype.run = yoyaku.yepnope(function(url,res,data,promises)
-	
-	var documentState = {
-		"url": url,
-		"res": res,
-		"data": data,
-		"document": $,
-		"tests": self.tests
-	};
-	
-	documentState,self.tests
+
+Initiates the running of the test suite.
+
+It is important to give this function the correct URL and response object, or the
+tests may not operate correctly.
+
+`BAS` will emit events during the execution of the tests.
+
+This function returns an object with promise handlers: `yep` for success, and `nope`
+for failure. See the [yoyaku](http://github.com/cgiffard/yoyaku) documentation for
+more information.
 
 ### Events
 
-	bas.emit("loadsheet");
-	this.emit("testregistered",name,func);
-	this.emit("start",url);
-	self.emit("parserror",parseError);
-	self.emit("assertion",assertion,node);
-	self.emit("assertionsuccess",assertion,node);
-	self.emit("assertionfailed",assertionErr,assertion);
-	self.emit("selector",selector,nodes);
-	self.emit("startgroup",rule);
-	this.emit("end",url,this.errors);
+*	`loadsheet`
+	Emitted when a new Bas sheet is successfully loaded.
+*	`testregistered` (name, func)
+	Emitted when a new test is registered with Bas.
+*	`start` (url)
+	Emitted when the test suite commences.
+*	`parseerror` (error)
+	Emitted when Cheerio encounters a parse error with the resource.
+*	`assertion` (assertion, [node])
+	Emitted when Bas begins testing an assertion. The node parameter is only
+	supplied when testing an assertion in a selector group.
+*	`assertionsuccess` (assertion, [node])
+	Emitted when Bas completes testing an assertion, and the result is truthy.
+	The node parameter is only supplied when testing an assertion in a selector
+	group.
+*	`assertionfailed` (assertionErr, assertion)
+	Emitted when Bas completes testing an assertion, and the result is falsy, and
+	the test is considered failed. The error triggered by the assertion is supplied
+	as the first parameter.
+*	`selector` (selector, node)
+	Emitted when Bas commences testing the assertions in a selector.
+*	`startgroup` (rule)
+	Emitted when Bas commences testing the assertions in a ruleset.
+*	`end` (url,errors)
+	Emitted when Bas completes the test suite. An array of errors is provided,
+	and the URL of the page the tests were executed against.
 
 ## Roadmap
 
