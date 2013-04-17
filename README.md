@@ -418,56 +418,97 @@ get a list of options by typing `bas -h` at the prompt.)
 
 The Bas API is extremely straightforward. To get started, simply require it:
 
+```javascript
 	var BAS = require("bas");
+```
 
 Create yourself a new BAS test suite like so:
 
+```javascript
 	var testSuite = new BAS();
+```
 
 Load in a Bas sheet (you can also supply a buffer if you'd prefer.)
-	
+
+```javascript
 	testSuite.loadSheet("./mysheet.bas");
+```
 	
-Then fetch a resiyrce (in this case, we're using [request](http://npm.im/request))
+Then fetch a resource (in this case, we're using [request](http://npm.im/request))
 and run the test suite against it. You'll need to pass in a URL and response object
 as well as the page data.
 
+```javascript
 	request("http://example.com",function(err,res,body) {
 		if (err) throw err;
 		
 		testSuite.run(url,res,data);
 	});
+```
 	
 The test suite runs asynchronously, and [emits events](#events) so you can know
 when errors have occurred, assertions have been tested, or that the suite has
 completed.
 
-We can listen to one of these events to 
+We can listen to one of these events to be alerted to when the test suite finishes,
+and receive a list of errors (if there were any!)
 
-### Class Reference
+```javascript
+	testSuite.on("end",function() {
+		if (testSuite.errors.length) {
+			console.log("Looks like there were some errors!");
+			testSuite.errors.forEach(function(err) {
+				console.error(err.message);
+			});
+		}
+	});
+```
 
-	new BAS( ... options ...  { continueOnParseFail });
+### API Reference
+
+#### BAS (constructor)
+
+	new BAS( [options] )
+
+Returns a new Bas test suite instance. The optional `options` parameter is an
+object, with the following possible keys:
+
+*	`continueOnParseFail` (Defaults to `false`)
+Should Cheerio fail to parse the HTML document, should Bas continue with the
+test suite, loading in a blank document? Or bail out?
+
+#### `BAS.tests` *property*
+
+tests { "test" : func  ... }
+
+#### `BAS.errors` *property*
+
+errors [ ... ] {
+	.clear()
+}
+
+#### `BAS.rules` *property*
+
+rules [ ruleset, rulset ]
+
+#### `BAS.stats` *property*
+stats {
+	testCount
+	pagesTested
+	tetsRun
+}
+
+#### `BAS.loadSheet` (buffer sheetData | string filePath)
+
+BAS.prototype.loadSheet = yoyaku.yepnope(function(sheet (buffer or string),promises)
+
+#### `BAS.registerTest`(string testName, function test)
+
+BAS.prototype.registerTest = function(name,func)
+
+#### `BAS.run` (string URL, object HTTPResponse, string Data)
 	
-	BAS {
-	
-		errors [ ... ] {
-			.clear()
-		}
-	
-		tests { "test" : func  ... }
-		errors [ assertionerr ]
-		rules [ ruleset, rulset ]
-	
-		stats {
-			testCount
-			pagesTested
-			tetsRun
-		}
-	}
-	
-	BAS.prototype.loadSheet = yoyaku.yepnope(function(sheet (buffer or string),promises)
-	BAS.prototype.registerTest = function(name,func)
-	BAS.prototype.run = yoyaku.yepnope(function(url,res,data,promises)
+BAS.prototype.run = yoyaku.yepnope(function(url,res,data,promises)
 	
 	var documentState = {
 		"url": url,
