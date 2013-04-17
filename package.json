@@ -1,10 +1,13 @@
 {
   "name": "bas",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Behaviour Assertion Sheets: Stylesheet-like syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha -R spec"
+  },
+  "bin": {
+    "bas": "lib/cli.js"
   },
   "repository": "",
   "keywords": [
