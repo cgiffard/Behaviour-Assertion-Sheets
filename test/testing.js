@@ -14,14 +14,10 @@ describe("Test runner",function() {
 		var BAS = require("../"),
 			testSuite = new BAS();
 		
-		// req.defer(url)
-		// 	.yep(testSuite.run.curry(3,url)
-		// 			.yep(done));
-		
 		req.defer(url)
 			.yep(function(req,data) {
 				testSuite.run(url,req,data)
-					.yep(done);
+					.yep(function() { done(); });
 			});
 		
 		testSuite

@@ -9,8 +9,7 @@
 	}
 	
 	h1 + .logo {
-		has-attribute: "user-id";
-		attribute-value(user-id): exists, gt(1);
+		attribute(user-id): exists, gt(1);
 	}
 	
 	
@@ -25,7 +24,7 @@
 	input:focus {
 		
 		input:focus + label {
-			has-attribute: "selected";
+			attribute(selected): exists;
 		}
 		
 	}
@@ -54,12 +53,12 @@
 
 /* negation demo 1 */
 @page (title !=~ /regex/ig) {
-
+	
 }
 
 /* negation demo 2 */
 @page (title != "stuff") {
-
+	
 }
 
 /*@ Validate every page and set up some sensible expectations */

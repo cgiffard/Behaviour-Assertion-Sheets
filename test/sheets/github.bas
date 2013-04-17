@@ -1,27 +1,23 @@
 @all {
 	
-	title: /github/i, length(43);
+	title: /github/i, length(41);
 	
 	title {
-		text: length(43);
+		text: length(41);
 	}
 	
 	h1 {
 		required: true;
 	}
 	
-	video {
-		required: true;
-	}
-	
 	img {
 		attribute(alt): true;
-		count: 99;
+		count: 3;
 	}
 	
 	img[src*="akamai"] {
 		required: true;
-		count: 99;
+		count: 3;
 	}
 }
 
