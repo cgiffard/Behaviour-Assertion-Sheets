@@ -274,15 +274,20 @@ Tests can also be added programatically. [See the API documentation for details.
 (#bas-nodejs-api)
 
 *	**title**
+	
 	Returns the title of the document.
 *	**url**
+	
 	Returns the complete URL used to request the document.
 *	**domain**
+	
 	Returns the domain from the URL used to request the document.
 *	**protocol**
+	
 	Returns the domain from the URL used to request the document. HTTP if
 	unspecified.
 *	**port**
+	
 	Returns the port from the URL used to request the document. 80 if unspecified.
 *	**path**
 	Returns the path from the URL used to request the document. (Includes
