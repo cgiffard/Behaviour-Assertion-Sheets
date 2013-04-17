@@ -7,9 +7,9 @@ ever used that. An easier DSL for client-side integration testing.
 
 You could:
 
-*	Use BAS to monitor the Apple Developer site to tell you when WWDC tickets
-	are on sale, or your local postal service to tell you when a package has been
-	delivered
+*	Use BAS to [monitor the Apple Developer site to tell you when WWDC tickets
+	are on sale](http://github.com/cgiffard/WWDC-Alerts), or your local postal
+	service to tell you when a package has been delivered
 *	Scan your site for common accessibility pitfalls, such as missing alt tags
 	on images, poor heading order, etc.
 *	Monitor for service availability and downtime
