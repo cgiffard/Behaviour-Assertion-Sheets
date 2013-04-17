@@ -3,7 +3,7 @@
 Behaviour Assertion Sheets (Bas, pronounced 'base') are a way to describe how a
 web page fits together, make assertions about its structure and content, and be
 notified when these expectations are not met. It's a bit like selenium, if you've
-ever used that.
+ever used that. An easier DSL for client-side integration testing.
 
 You could:
 
@@ -274,20 +274,15 @@ Tests can also be added programatically. [See the API documentation for details.
 (#bas-nodejs-api)
 
 *	**title**
-	
 	Returns the title of the document.
 *	**url**
-	
 	Returns the complete URL used to request the document.
 *	**domain**
-	
 	Returns the domain from the URL used to request the document.
 *	**protocol**
-	
 	Returns the domain from the URL used to request the document. HTTP if
 	unspecified.
 *	**port**
-	
 	Returns the port from the URL used to request the document. 80 if unspecified.
 *	**path**
 	Returns the path from the URL used to request the document. (Includes
@@ -321,6 +316,46 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the number of nodes that matched a given selector.
 
 ### Bareword Functions
+
+Barewords are used in assertions to evaluate the result of a test. Barewords
+can have arguments.
+
+*	**true**
+	Tests whether a test result is truthy.
+*	**false**
+	Tests whether a test result is falsy.
+*	**exists**
+	Synonym for true. (Can make sheets more readable.)
+*	**required**
+	Synonym for true. (Can make sheets more readable.)
+*	**exists**
+	Synonym for true. (Can make sheets more readable.)
+*	**forbidden**
+	Synonym for false. (Can make sheets more readable.)
+*	**gt** (expectation)
+	Tests whether the test result is numerically greater than the expectation.
+*	**gte** (expectation)
+	Tests whether the test result is numerically greater or equal than the
+	expectation.
+*	**lt** (expectation)
+	Tests whether the test result is numerically less than the expectation.
+*	**lte** (expectation)
+	Tests whether the test result is numerically less than or equal to the
+	expectation.
+*	**ne** (expectation)
+	Tests whether the test result is numerically not equal to the expectation.
+*	**Length** (expected length)
+	Returns true if the length of a test result (cast as a string) matches the
+	expected length.
+*	**longer-than** (expectation)
+	Tests whether the string length of the test result is greater than the
+	expectation.
+*	**shorter-than** (expectation)
+	Tests whether the string length of the test result is less than the
+	expectation.
+*	**contains** (expectation)
+	Tests whether the test result as a string contains an exact match for the
+	expectation.
 
 ## Bas on the Command Line
 
