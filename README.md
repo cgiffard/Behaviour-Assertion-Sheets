@@ -59,7 +59,7 @@ An example rulset:
 		...
 	}
 
-#### Annotation
+#### Annotations
 
 Annotations are an extension of CSS comments, that are prepended with an `@` symbol.
 Bas knows to associate these with rulesets and selectors that follow, and displays
@@ -74,15 +74,15 @@ An example annotation:
 
 	/*@ Here's my annotation! */
 
-#### Condition
+#### Conditions
 
 A condition is appended to a page-specific ruleset (`@page`) and determines based
 on the response information, URL of the page, and other environment variables,
 whether the current page should be evaluated against this ruleset.
 
 Conditions are additive and exclusive - each has to be true for the page to be
-considered for testing against a given rulset. You may add as many as you like to
-a given ruleset.
+considered for testing against a given ruleset. You may add as many conditions
+as you like to a `@page` ruleset.
 
 Conditions are composed of a parentheses-wrapped set of three elements, each space
 separated. On the left-hand side, a `test` - a reference to a function which
@@ -107,14 +107,23 @@ Multiple conditions may be combined like so:
 Remember that adding more conditions will make the match more *exclusive*, as
 every single one must succeed for the ruleset to be evaluated.
 
-#### Assertion
+#### Assertions
 
 An assertion is very similar to a `declaration` in CSS. Fundamentally, it is a
 semicolon delimited key-value pair, that unlike CSS, defines an expectation
 rather than assigning a value.
 
 The left-hand side of the assertion is known as the [subject](#subject) of the
-assertion, 
+assertion, and refers to a [test](#tests) - a function that returns a value based
+on the content of the current page/request.
+
+This value is then compared against the right-hand side of the assertion - which
+can contain any number of match requirements, separated by commas and/or spaces.
+These requirements are evaluated separately, and should any single one of them
+fail (return a falsy value) the assertion will be considered `failed`.
+
+Match requirements for an assertion can be strings, numbers, regular expressions,
+or (barewords)[#barewords].
 
 ### Bas Example
 
