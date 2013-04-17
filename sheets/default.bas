@@ -31,7 +31,11 @@
 	
 }
 
-/* Check to see whether pages are being transferred with the correct MIME types */
+/*@	Assert that pages delivered to us with a 400 or 500 series code should have
+	been delivered as 200 OK */
+@page (status-code =~ /[45]\d+/) { status-code: 200; }
+
+/*@ Check to see whether pages are being transferred with the correct MIME types */
 @page (url =~ /\.css$/i)	{ content-type: "text/css";			}
 @page (url =~ /\.js$/i)		{ content-type: "text/javascript";	}
 @page (url =~ /\.mp4$/i)	{ content-type: "video/mp4";		}
