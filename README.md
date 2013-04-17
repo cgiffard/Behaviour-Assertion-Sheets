@@ -46,7 +46,8 @@ CSS. Here are the major components:
 
 Rulesets are the highest-level construct in Bas. Everything falls inside a ruleset.
 There are two kinds of rulesets - page specific rulesets denoted by the tag `@page`,
-and rulesets that execute unconditionally, denoted by the tag `@all`.
+and rulesets that execute against every page unconditionally, denoted by the
+tag `@all`.
 
 Syntactically these are based on the 'at-rules' of CSS (such as `@font-face`,
 `@media`, etc.)
@@ -107,15 +108,46 @@ Multiple conditions may be combined like so:
 Remember that adding more conditions will make the match more *exclusive*, as
 every single one must succeed for the ruleset to be evaluated.
 
+#### Selector
+
+A selector groups a block of assertions together, and executes them against every
+node in a page that matches the selector string.
+
+The selector string is formatted exactly like a regular CSS selector - tags, IDs,
+classes, pseudoclasses, and attribute syntax are all the same.
+
+The assertions wrapped within a selector block are only executed should the
+selector match at least one node - with one exception: the special `required`
+assertion [subject](#assertion-subject) which executes regardless of whether a
+selector matches.
+
+There's a caveat to this too, though: should a selector containing the `required`
+assertion subject be nested inside another selector block which does not match
+any nodes, it will not be executed. This allows syntax like the following:
+
+```css
+	h2 {
+		h1 { required: true; }
+	}
+```
+
+In this case, the heading 1 is required if one or more second-level headings
+are present.
+
+##### Nesting selectors
+
+Selector blocks can be nested. If a selector block is nested within another, it
+will only be executed should the parent selector match.
+
 #### Assertions
 
 An assertion is very similar to a `declaration` in CSS. Fundamentally, it is a
 semicolon delimited key-value pair, that unlike CSS, defines an expectation
 rather than assigning a value.
 
-The left-hand side of the assertion is known as the [subject](#subject) of the
-assertion, and refers to a [test](#tests) - a function that returns a value based
-on the content of the current page/request.
+The left-hand side of the assertion is known as the [subject](#assertion-subject)
+of the assertion, and refers to a [test](#tests) - a function that returns a value
+based on the content of the current page/request.
 
 This value is then compared against the right-hand side of the assertion - which
 can contain any number of match requirements, separated by commas and/or spaces.
@@ -123,7 +155,49 @@ These requirements are evaluated separately, and should any single one of them
 fail (return a falsy value) the assertion will be considered `failed`.
 
 Match requirements for an assertion can be strings, numbers, regular expressions,
-or (barewords)[#barewords].
+negated regular expressions (prepended with !) or [barewords](#barewords).
+
+An example of an assertion in use:
+
+	attribute(style): contains("font-family");
+
+#### Assertion Subject
+
+The left-hand side of every assertion is known as an `assertion subject`, and
+refers to a test function that returns a value from the current page or response
+information. A list of these functions can be found in the [syntax glossary.]
+(#tests)
+
+An example of an assertion subject in use might be:
+
+	title: /github/i;
+
+In this case, the assertion subject is `title`. It refers to a test function called
+`title` which extracts the current document title. This is returned for the regex
+comparison on the right hand side of the assertion.
+
+Some tests take arguments. This is how an assertion with test arguments is
+represented:
+
+	attribute(role): "main";
+
+#### Barewords
+
+The right-hand side of the assertion, as well as regular expression, numeric, and
+string matches, can contain special keywords known as barewords (for their lack
+of enclosing quotation marks.)
+
+These keywords refer to a special function that by design has no access to the
+document - just the value returned by the [assertion subject](#assertion-subject),
+and any optional arguments it is given.
+
+If the result of this function is falsy, then the assertion is considered `failed`.
+
+A full list of barewords can be found in the [syntax glossary](#bareword-functions).
+
+An example of barewords in use:
+
+	attribute(user-id): exists, longer-than(1), gte(1);
 
 ### Bas Example
 
@@ -177,9 +251,71 @@ response was less than 500.
 
 ### Operators
 
+Operators are used in ruleset conditions, like `(title !=~ /github/i)`.
+
+A full list follows:
+
+* `=` true if `a == b`
+* `!=` true if `a !== b`
+* `=~` true if the regular expression `a` matches `b`
+* `!=~` true if the regular expression `a` does not match `b`
+* `>` true if `a > b` where both `a` and `b` are considered floats
+* `<` true if `a < b` where both `a` and `b` are considered floats
+* `>=` true if `a >= b` where both `a` and `b` are considered floats
+* `<=` true if `a <= b` where both `a` and `b` are considered floats
+
 ### Tests
 
-### Barewords
+Tests without arguments may be used in ruleset conditions, like
+`(title !=~ /github/i)`, or as assertion subjects with or without arguments, like
+`attribute(role): "navigation"`.
+
+Tests can also be added programatically. [See the API documentation for details.]
+(#bas-nodejs-api)
+
+*	**title**
+	Returns the title of the document.
+*	**url**
+	Returns the complete URL used to request the document.
+*	**domain**
+	Returns the domain from the URL used to request the document.
+*	**protocol**
+	Returns the domain from the URL used to request the document. HTTP if
+	unspecified.
+*	**port**
+	Returns the port from the URL used to request the document. 80 if unspecified.
+*	**path**
+	Returns the path from the URL used to request the document. (Includes
+	querystring)
+*	**pathname**
+	Returns the path name from the URL used to request the document. (Does not
+	include querystring)
+*	**query** ( [query parameter] )
+	Returns the entire query string from the URL used to request the document if
+	the 'query parameter' attribute is not passed to the test. If the `query
+	parameter` attribute is present, the individual value for the specified query
+	parameter will be returned, or null if the parameter does not exist.
+*	**status-code**
+	Returns the HTTP response status code the current document was served with.
+*	**content-length**
+	Returns the `Content-Length` header with which the current document was served.
+*	**content-type**
+	Returns the `Content-Type` header with which the current document was served.
+*	**header** (header name)
+	Returns the value of the header specified by the argument.
+*	**required**
+	Always returns true.
+
+#### Tests which must be executed on nodes (placed in selector blocks)
+
+*	**text**
+	Returns the text from a given node.
+*	**attribute** (attribute name)
+	Returns the value of the specified attribute from a given node.
+*	**count**
+	Returns the number of nodes that matched a given selector.
+
+### Bareword Functions
 
 ## Bas on the Command Line
 
