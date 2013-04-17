@@ -2,7 +2,8 @@
 
 Behaviour Assertion Sheets (Bas, pronounced 'base') are a way to describe how a
 web page fits together, make assertions about its structure and content, and be
-notified when these expectations are not met.
+notified when these expectations are not met. It's a bit like selenium, if you've
+ever used that.
 
 You could:
 
@@ -38,7 +39,8 @@ CSS. Here are the major components:
 ![Major components of the Bas syntax, as described by the list below.]
 (http://cgiffard.com/github/bas/bas-diagram.png)
 
-([Jump to syntax example.](#bas-example))
+(You can work this out yourself and just want to skip to the goods?
+[Jump to syntax example.](#bas-example))
 
 #### Rulesets
 
@@ -49,7 +51,70 @@ and rulesets that execute unconditionally, denoted by the tag `@all`.
 Syntactically these are based on the 'at-rules' of CSS (such as `@font-face`,
 `@media`, etc.)
 
+Rulesets cannot be nested.
 
+An example rulset:
+
+	@all {
+		...
+	}
+
+#### Annotation
+
+Annotations are an extension of CSS comments, that are prepended with an `@` symbol.
+Bas knows to associate these with rulesets and selectors that follow, and displays
+them in assertion failure traces so you know where they came from!
+
+You may add as many annotations as you like to a single element. Every annotation
+that precedes a block, regardless of whether assertions or regular comments (just
+normal CSS comments without an `@`) are interspersed within them, is associated
+with that block.
+
+An example annotation:
+
+	/*@ Here's my annotation! */
+
+#### Condition
+
+A condition is appended to a page-specific ruleset (`@page`) and determines based
+on the response information, URL of the page, and other environment variables,
+whether the current page should be evaluated against this ruleset.
+
+Conditions are additive and exclusive - each has to be true for the page to be
+considered for testing against a given rulset. You may add as many as you like to
+a given ruleset.
+
+Conditions are composed of a parentheses-wrapped set of three elements, each space
+separated. On the left-hand side, a `test` - a reference to a function which
+returns an environment variable or extracts an aspect of the current page or
+server response.
+
+The middle is an operator, which defines how the comparison takes place. An example
+of an operator might be `=` or `>=` or `!=~`. A full list of operators can be
+found in the [syntax glossary](#operators).
+
+The rightmost component is the assertion value - a string, number, or regular
+expression which is compared to the test according to the rules of the operator.
+
+An example condition:
+
+	@page (status-code = 301) { ... }
+
+Multiple conditions may be combined like so:
+
+	@page (status-code = 301) (content-type != text/html) { ... }
+	
+Remember that adding more conditions will make the match more *exclusive*, as
+every single one must succeed for the ruleset to be evaluated.
+
+#### Assertion
+
+An assertion is very similar to a `declaration` in CSS. Fundamentally, it is a
+semicolon delimited key-value pair, that unlike CSS, defines an expectation
+rather than assigning a value.
+
+The left-hand side of the assertion is known as the [subject](#subject) of the
+assertion, 
 
 ### Bas Example
 
@@ -99,7 +164,13 @@ regular expression `/github/i`:
 Then, on every page tested, Bas will check to see whether the status code of the
 response was less than 500. 
 
+## Syntax Glossary
 
+### Operators
+
+### Tests
+
+### Barewords
 
 ## Bas on the Command Line
 
@@ -112,6 +183,14 @@ response was less than 500.
 *	Asynchronous test support
 *	Comprehensive test suite
 *	Very solid cleanup
+
+#### Further down the road
+
+*	Support for headless browsers and PhantomJS
+
+#### Under consideration
+
+*	Cross compilation of Bas sheets to selenium
 
 ## Testing
 
