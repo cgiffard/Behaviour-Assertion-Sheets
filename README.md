@@ -38,6 +38,17 @@ CSS. Here are the major components:
 ![Major components of the Bas syntax, as described by the list below.]
 (http://cgiffard.com/github/bas/bas-diagram.png)
 
+([Jump to syntax example.](#bas-example))
+
+#### Rulesets
+
+Rulesets are the highest-level construct in Bas. Everything falls inside a ruleset.
+There are two kinds of rulesets - page specific rulesets denoted by the tag `@page`,
+and rulesets that execute unconditionally, denoted by the tag `@all`.
+
+Syntactically these are based on the 'at-rules' of CSS (such as `@font-face`,
+`@media`, etc.)
+
 
 
 ### Bas Example
