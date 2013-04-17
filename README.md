@@ -359,7 +359,62 @@ can have arguments.
 
 ## Bas on the Command Line
 
+If you [installed Bas globally](#installing), you'll have access to a `bas` CLI
+client which (hopefully) is available in your `$PATH`.
+
+The `bas` CLI client can request a series of URLs, or initiate a crawl using the
+provided list of URLs as a seed.
+
+If you want to use Bas in another, non-JS project or in some kind of automated
+capacity from the shell, you can supply a `-j` option to get test results as raw
+JSON.
+
+Here's a very simple example of how you might use the CLI tool:
+
+	bas -vc -s mysheet.bas http://www.mywebsite.com/
+
+In this example, the file `mysheet.bas` would be loaded and, with verbose reporting,
+a crawl of mywebsite.com initiated (the `-c` option starts a crawl.) The test
+suite would be run against every page returned, for as many pages as are present
+and accessible from the given URL. Obviously it may make sense to limit the number
+of pages downloaded: you can do this with the `-l` option:
+
+	bas -vc -l 10 -s mysheet.bas http://mywebsite.com/
+	
+If the `-s` option isn't specified, `bas` will look for the assertion sheet on
+`STDIN`. Therefore, you can cat a file and pipe it to `bas` as well:
+
+	cat mysheet.bas | bas -v http://mydomain.com/testfile.html
+
+Or, if you haven't piped anything, `bas` will prompt you to enter the sheet
+information manually:
+	
+	➭  bas -v http://www.regex.info
+	Waiting for BAS input from STDIN.
+	@all {
+		h1 { required; }
+	}
+	^D
+	Thanks, got it.
+	
+	<snip>
+
+Here's the full list of options supported by `bas` at this time: (you can also
+get a list of options by typing `bas -h` at the prompt.)
+
+* `-h`, `--help` Output usage information
+* `-V`, `--version` Output the version number
+* `-c`, `--crawl` Crawl from the specified URLs
+* `-s`, `--sheet [filename]` Test using the specified BAS
+* `-l`, `--limit [number]` Limit number of resources to request when crawling
+* `-d`, `--die` Die on first error
+* `-q`, `--quiet` Suppress output (prints final report/json only)
+* `-v`, `--verbose` Verbose output
+* `-j`, `--json` Output list of errors/test results as JSON
+
 ## Bas Node.js API
+
+### Events
 
 ## Roadmap
 
@@ -368,6 +423,7 @@ can have arguments.
 *	Asynchronous test support
 *	Comprehensive test suite
 *	Very solid cleanup
+*	Load in HTML/XML to test against from disk using `bas` CLI tool
 
 #### Further down the road
 
