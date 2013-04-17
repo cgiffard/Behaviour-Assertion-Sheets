@@ -1,3 +1,5 @@
+/* Example file to demonstrate how you might write a behaviour assertion sheet. */
+
 @page (content-type =~ /^text\/html/i) {
 	
 	h1 {
@@ -26,7 +28,7 @@
 	
 	/*@ Inline Styles (we don't want them!) */
 	* {
-		/* attribute(style): forbidden; */
+		attribute(style): forbidden;
 	}
 	
 }
