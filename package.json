@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Behaviour Assertion Sheets: Stylesheet-like syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
