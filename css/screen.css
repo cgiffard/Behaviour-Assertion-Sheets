@@ -83,52 +83,41 @@ p {
 }
 
 section {
-	width: 60%;
 	margin-bottom: 8em;
 }
 
 article section h1 {
-	position:relative;
-	background-color: #500031;
 	min-height: 4em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-}
-
-article section h1:before {
-	content: "　";
-	display: block;
-	position: absolute;
-	background-color: #500031;
-	width: 500%;
-	height: 4em;
-	top: 0px;
-	margin-left: -500%;
-}
-
-article section.alternate h1:before {
-	display: none;
+	width: 60%;
+	text-shadow:hsla(333, 88%, 15%, 1) 1px 1px 0px,
+				hsla(333, 88%, 15%, 1) 2px 2px 0px,
+				hsla(333, 88%, 15%, 1) 3px 3px 0px,
+				black 0px 0px 3px;
+	color: hsla(333, 88%, 50%, 1);
 }
 
 article section.alternate h1 {
-	padding-left: 0.5em;
-	background-color: #005046;
-}
-
-article section.alternate h1:after {
-	content: "　";
-	display: block;
-	position: absolute;
-	background-color: #005046;
-	width: 500%;
-	height: 4em;
-	top: 0px;
-	margin-right: -500%;
-	z-index: -1;
+	text-shadow:hsla(40, 88%, 15%, 1) 1px 1px 0px,
+				hsla(40, 88%, 15%, 1) 2px 2px 0px,
+				hsla(40, 88%, 15%, 1) 3px 3px 0px,
+				black 0px 0px 3px;
+	color: hsla(40, 88%, 50%, 1);
+	text-align: right;
+	
+	width: 100%;
+	padding-left: 40%;
+	padding-right: 1em;
 }
 
 section > p {
 	padding-right: 1em;
+}
+
+article section .col {
+	width: 50%;
+	float: left;
 }
 
 section.intermediate {
@@ -147,13 +136,86 @@ section.fourcol {
 
 .col {
 	float: left;
+	min-width: 150px;
 }
 
 section.fourcol .col {
 	width: 25%;
 	padding-right: 2em;
+	
+	text-align: center;
 }
 
-section.alternate {
-	margin-left: 40%;
+section > *:last-child:after {
+	content: "　";
+	clear:both;
+	position: absolute;
+}
+
+.col h3 {
+	font-size: 1.5em;
+	min-height: 3em;
+	color: #a17500;
+}
+
+.col p:nth-child(odd) {
+	min-height: 8em;
+	font-size: 1.3em;
+}
+
+.col p:last-child {
+	font-size: 1.3em;
+}
+
+a {
+	color: #AAA;
+	text-shadow: black 1px 1px 0px;
+}
+
+.icon {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+pre {
+	font-size: 1.3em;
+	font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+	tab-size: 4;
+	line-height: 1.7em;
+	padding-left: 1em;
+	margin-bottom: 4em;
+}
+
+pre atrule {
+	color: goldenrod;
+}
+
+pre test {
+	color: #228890;
+}
+
+pre comment {
+	color: #777;
+}
+
+pre bareword {
+	color: #8e124a;
+}
+
+pre selector {
+	font-weight: bold;
+	color: #52931c;
+}
+
+pre barewordvalue, pre comparison {
+	color: #AAA;
+	font-weight: lighter;
+	font-style: oblique;
+}
+
+pre regex {
+	color: #b91620;
 }

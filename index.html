@@ -37,37 +37,40 @@
 		<article main>
 			<section class="intro normal">
 				<h1>Bas. Client side integration testing made less painful.</h1>
-				<p>
-					Behaviour Assertion Sheets are a new way to assert to a test
-					library how the front-end aspects of your website are intended
-					to fit together. The syntax is familiar to anybody who has
-					ever used CSS - simple, declarative, no cruft.
-				</p>
-				<p>
-					Bas (pronounced &lsquo;bass&rsquo;) is written in JavaScript,
-					and runs in the server atop Node.js. I’m hoping that other
-					people contribute new, better implementations for different
-					stacks - and help specify Bas as a defacto standard.
-				</p>
+				<div class="col">
+					<p pain-level="0">
+						Behaviour Assertion Sheets are a new way to assert to a test
+						library how the front-end aspects of your website are intended
+						to fit together. The syntax is familiar to anybody who has
+						ever used CSS - simple, declarative, no cruft.
+					</p>
+					<p>
+						Bas (pronounced &lsquo;bass&rsquo;) is written in JavaScript,
+						and runs in the server atop Node.js. I’m hoping that other
+						people contribute new, better implementations for different
+						stacks - and help specify Bas as a defacto standard.
+					</p>
+				</div>
+				<pre class="illustrative col">
+<atrule>@page</atrule>   (<test>domain</test> = <comparison>"cgiffard.github.io"</comparison>)
+        (<test>page</test> = <comparison>"/Behaviour-Assertion-Sheets/"</comparison>) {
+    
+    <selector>h1</selector> {
+        <comment>/* Don't want to experience any pain here! */</comment>
+        <assertion><test>text</test>: <bareword>contains</bareword>(<barewordvalue>"less painful"</barewordvalue>)</assertion>;
+    }
+    
+    <selector>section p.intro:nth-child(1)</selector> {
+        <assertion><test>text</test>: <bareword>contains</bareword>(<barewordvalue>"simple"</barewordvalue>), <regex>/declarative/i</regex></assertion>;
+        <assertion><test>attribute(pain-level)</test>: <bareword>lt</bareword>(<barewordvalue>99999</barewordvalue>)</assertion>;
+    }
+}
+</pre>
 			</section>
-<!-- 			<pre class="illustrative">
-				@page (domain = cgiffard.github.io) (page = /Behaviour-Assertion-Sheets/) {
-					
-					h1 {
-						/* Don't want to experience any pain here! */
-						text: contains("less painful");
-					}
-					
-					section p.intro:nth-child(1) {
-						text: contains("simple"), /declarative/i, shorter-than(99999);
-					}
-					
-				}
-			</pre> -->
 			<section class="intermediate fourcol">
 				<h2>What can I use Bas for?</h2>
 				<div class="col">
-					<img>
+					<img class="icon" src="images/icon-integrationtesting.svg" alt="Clipboard Icon" width="100" height="100"/>
 					<h3>Integration Testing</h3>
 					<p>
 						Plug Bas into your CI system to so you know when you've
@@ -76,7 +79,7 @@
 					<p><a href="/examples/integrationtesting">Integration testing example</a></p>
 				</div>
 				<div class="col">
-					<img>
+					<img class="icon" src="images/icon-monitoring.svg" alt="Clipboard Icon" width="100" height="100"/>
 					<h3>Availability and Monitoring</h3>
 					<p>
 						Know when your site/app is up, and serving content in
@@ -85,7 +88,7 @@
 					<p><a href="/examples/monitoring">Service monitoring example</a></p>
 				</div>
 				<div class="col">
-					<img>
+					<img class="icon" src="images/icon-accessibility.svg" alt="Clipboard Icon" width="100" height="100"/>
 					<h3>Accessibility and Compliance</h3>
 					<p>
 						Automatically test for common accessibility pitfalls, or
@@ -94,8 +97,8 @@
 					<p><a href="/examples/acessibility">Accessibility testing example</a></p>
 				</div>
 				<div class="col">
-					<img>
-					<h3>Reporting</h3>
+					<img class="icon" src="images/icon-reporting.svg" alt="Clipboard Icon" width="100" height="100"/>
+					<h3>Reporting and Aggregation</h3>
 					<p>
 						Track out how your site/application is structured. Find and
 						analyse failures and quirks.
