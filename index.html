@@ -30,7 +30,7 @@
 					</surround>
 				</driver>
 			</speaker>
-			<a href="/">
+			<a href="/" class="logo">
 				<h1><abbr title="Behaviour Assertion Sheets">Bas.</abbr></h1>
 			</a>
 		</header>
@@ -38,13 +38,33 @@
 			<section class="intro normal">
 				<h1>Bas. Client side integration testing made less painful.</h1>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-					sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					Behaviour Assertion Sheets are a new way to assert to a test
+					library how the front-end aspects of your website are intended
+					to fit together. The syntax is familiar to anybody who has
+					ever used CSS - simple, declarative, no cruft.
+				</p>
+				<p>
+					Bas (pronounced &lsquo;bass&rsquo;) is written in JavaScript,
+					and runs in the server atop Node.js. I’m hoping that other
+					people contribute new, better implementations for different
+					stacks - and help specify Bas as a defacto standard.
 				</p>
 			</section>
-			<section class="intermediate threcol">
+<!-- 			<pre class="illustrative">
+				@page (domain = cgiffard.github.io) (page = /Behaviour-Assertion-Sheets/) {
+					
+					h1 {
+						/* Don't want to experience any pain here! */
+						text: contains("less painful");
+					}
+					
+					section p.intro:nth-child(1) {
+						text: contains("simple"), /declarative/i, shorter-than(99999);
+					}
+					
+				}
+			</pre> -->
+			<section class="intermediate fourcol">
 				<h2>What can I use Bas for?</h2>
 				<div class="col">
 					<img>
@@ -84,7 +104,7 @@
 				</div>
 			</section>
 			<section class="alternate">
-				<h1>Getting Started</h1>
+				<h1>Getting started with Bas in your own projects</h1>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
 					sed do eiusmod tempor incididunt ut labore et dolore magna

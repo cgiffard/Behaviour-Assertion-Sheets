@@ -12,17 +12,23 @@ speaker {
 	left: 50%;
 	
 	background-color: #353535;
-	background-image: -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(hsl(0, 0%, 7%)), to(hsl(0, 0%, 21%)));
-	background-image: -webkit-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
-	background-image: -moz-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
-	background-image: -o-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
-	background-image: -ms-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
-	background-image: radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(hsl(0, 0%, 7%)), to(hsl(0, 0%, 21%)));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), -webkit-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), -moz-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), -o-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), -ms-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
+	background-image: url("../images/grain.png"), url("../images/noise.png"), radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
 	
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	
-	box-shadow: inset rgba(0,0,0,0.75) 0px -7px 27px,
+	background-position: left top, left top, center center;
+	background-repeat: repeat, repeat, no-repeat;
+	
+	border: solid black 1px;
+	
+	box-shadow: inset rgba(0,0,0,1) 0px 0px 5px,
+				inset rgba(0,0,0,1) 0px -7px 27px,
 				rgba(0,0,0,0.75) 0px 5px 5px;
 }
 
@@ -42,6 +48,8 @@ driver {
 	
 	box-shadow:	inset black 0px 0px 9px,
 				rgba(255,255,255,0.2) 0px 0px 3px;
+	
+	background-image: url("../images/noise.png");
 }
 
 surround {
@@ -53,6 +61,8 @@ surround {
 	
 	box-shadow:	inset rgba(0,0,0,0.9) 0px 0px 92px,
 				rgba(255,255,255,0.33) 0px 0px 3px;
+
+	background-image: url("../images/noise.png");
 }
 
 cone {
@@ -78,12 +88,12 @@ coneinner {
 	
 	box-shadow:	inset rgba(0,0,0,0.69) 0px 0px 9px;
 	
-	background-image: -webkit-gradient(linear, left center, right center, from(hsla(0, 0%, 39%, 0.30)), to(hsla(0, 0%, 0%, 0.10)));
-	background-image: -webkit-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
-	background-image: -moz-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
-	background-image: -o-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
-	background-image: -ms-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
-	background-image: linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
+	background-image: url("../images/noise.png"), -webkit-gradient(linear, left center, right center, from(hsla(0, 0%, 39%, 0.30)), to(hsla(0, 0%, 0%, 0.10)));
+	background-image: url("../images/noise.png"), -webkit-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
+	background-image: url("../images/noise.png"), -moz-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
+	background-image: url("../images/noise.png"), -o-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
+	background-image: url("../images/noise.png"), -ms-linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
+	background-image: url("../images/noise.png"), linear-gradient(left, hsla(0, 0%, 39%, 0.30), hsla(0, 0%, 0%, 0.10));
 
 }
 
@@ -185,19 +195,20 @@ ribs:after {
 	/* It's a space, but a japanese space. So I think it works. */
 	content: "　";
 	
-	width: 568px;
-	height: 568px;
+	width: 658px;
+	height: 658px;
+	
+	margin-left: -329px;
+	margin-top: -54px;
 	
 	z-index: 11;
 	
-	margin-left: -284px;
-	
-	background: -moz-linear-gradient(left, rgba(20,20,20,0.6) 0%, rgba(20,20,20,0.6) 25%, rgba(50,50,50,0.6) 50%, rgba(20,20,20,0.6) 75%, rgba(20,20,20,0.6) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(20,20,20,0.6)), color-stop(25%,rgba(20,20,20,0.6)), color-stop(50%,rgba(50,50,50,0.6)), color-stop(75%,rgba(20,20,20,0.6)), color-stop(100%,rgba(20,20,20,0.6))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* IE10+ */
-	background: linear-gradient(to right, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* W3C */
+	background: url("../images/noise.png"), -moz-linear-gradient(left, rgba(20,20,20,0.6) 0%, rgba(20,20,20,0.6) 25%, rgba(50,50,50,0.6) 50%, rgba(20,20,20,0.6) 75%, rgba(20,20,20,0.6) 100%); /* FF3.6+ */
+	background: url("../images/noise.png"), -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(20,20,20,0.6)), color-stop(25%,rgba(20,20,20,0.6)), color-stop(50%,rgba(50,50,50,0.6)), color-stop(75%,rgba(20,20,20,0.6)), color-stop(100%,rgba(20,20,20,0.6))); /* Chrome,Safari4+ */
+	background: url("../images/noise.png"), -webkit-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* Chrome10+,Safari5.1+ */
+	background: url("../images/noise.png"), -o-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* Opera 11.10+ */
+	background: url("../images/noise.png"), -ms-linear-gradient(left, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* IE10+ */
+	background: url("../images/noise.png"), linear-gradient(to right, rgba(20,20,20,0.6) 0%,rgba(20,20,20,0.6) 25%,rgba(50,50,50,0.6) 50%,rgba(20,20,20,0.6) 75%,rgba(20,20,20,0.6) 100%); /* W3C */
 	
 	box-shadow: inset black 0px 0px 50px;
 }
@@ -215,15 +226,16 @@ dome {
 	z-index: 11;
 	
 	background-color: #464646;
-	background-image: -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(hsl(0, 0%, 5%)), to(hsl(0, 0%, 27%)));
-	background-image: -webkit-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
-	background-image: -moz-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
-	background-image: -o-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
-	background-image: -ms-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
-	background-image: radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
+	background-image: url("../images/noise.png"), -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(hsl(0, 0%, 5%)), to(hsl(0, 0%, 27%)));
+	background-image: url("../images/noise.png"), -webkit-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
+	background-image: url("../images/noise.png"), -moz-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
+	background-image: url("../images/noise.png"), -o-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
+	background-image: url("../images/noise.png"), -ms-radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
+	background-image: url("../images/noise.png"), radial-gradient(50% 50%, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
 	
 	box-shadow: inset rgba(0,0,0,0.5) 0px 0px 15px,
-				rgba(0,0,0,0.63) 0px 0px 3px,
+				rgba(0,0,0,1) 0px 0px 5px,
 				rgba(0,0,0,0.63) 0px 13px 14px;
+	
+	border: solid 1px black;
 }
-
