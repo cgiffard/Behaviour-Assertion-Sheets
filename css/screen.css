@@ -48,12 +48,80 @@ a.logo {
 	background-image: url(../images/speaker-label.png);
 	background-repeat: no-repeat;
 	
-	margin-top: 320px;
-	margin-left: 111px;
+	left: 50%;
+	top: 0px;
+	margin-left: -88px;
+	margin-top: 330px;
+}
+
+@media only screen and (max-width: 500px) {
+	header {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	a.logo {
+		left: auto;
+		top: 0px;
+		margin-top: 320px;
+		margin-left: 111px;
+	}
 }
 
 a.logo h1 {
 	margin-left: 200px;
+}
+
+.navcontainer {
+	margin-top: 5em;
+	margin-bottom: 3em;
+	min-height: 8em;
+}
+
+nav {
+	overflow: hidden;
+	background-color: black;
+}
+
+@media only screen and (min-width: 960px) {
+	nav.top {
+		margin-top: 0px;
+		position: fixed;
+		background-color: rgba(0,0,0,0.8);
+		width: 100%;
+		top: 0px;
+		left: 0px;
+	}
+}
+
+nav ul {
+	display: block;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+nav li {
+	display: block;
+	list-style-type: none;
+	float: left;
+	font-size: 1em;
+}
+
+nav li a {
+	font-size: 2em;
+	display: block;
+	line-height: 4em;
+	text-decoration: none;
+	margin-right: 1em;
+}
+
+nav li a:hover,
+nav li a:focus {
+	color: hsla(333, 88%, 50%, 1);
 }
 
 [main] {
@@ -63,7 +131,6 @@ a.logo h1 {
 	margin-right: auto;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-top: 4em;
 	line-height: 2em;
 }
 
@@ -83,10 +150,26 @@ h2 {
 	margin-bottom: 0.5em;
 }
 
+h3 {
+	font-size: 1.5em;
+	text-transform: uppercase;
+	color: #888;
+	margin-bottom: 1em;
+}
+
 p {
 	margin-bottom: 2em;
 	font-size: 1.5em;
 	line-height: 2em;
+}
+
+ul {
+	padding-left: 2em;
+	margin-bottom: 2em;
+}
+
+li {
+	font-size: 1.5em;
 }
 
 code {
@@ -135,6 +218,24 @@ article section.finally h1 {
 	color: hsla(160, 88%, 50%, 1);
 }
 
+@media only screen and (min-width: 501px) and (max-width: 700px) {
+	article section h1 {
+		width: 75%;
+		padding-left: 0px !important;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	article section h1 {
+		width: 100% !important;
+	}
+	
+	article section.alternate h1 {
+		width: 100% !important;
+		padding-left: 0px !important;
+	}
+}
+
 section > p {
 	padding-right: 1em;
 }
@@ -142,7 +243,7 @@ section > p {
 article section .col {
 	width: 50%;
 	float: left;
-	padding-right: 1em;
+	padding-right: 2em;
 }
 
 section.intermediate {
@@ -167,6 +268,18 @@ section.fourcol .col {
 	padding-right: 2em;
 	
 	text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+	.col {
+		width: 100% !important;
+		float: none !important;
+	}
+	
+	section.fourcol .col {
+		float: left !important;
+		width: 50% !important;
+	}
 }
 
 section > *:last-child:after {
@@ -248,4 +361,11 @@ hr {
 	clear: both;
 	border: none;
 	border-top: dashed #222 1px;
+}
+
+footer {
+	padding-top: 1em;
+	padding-bottom: 1em;
+	font-size: 1.5em;
+	color: #AAA;
 }

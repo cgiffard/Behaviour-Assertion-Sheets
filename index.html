@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<header>
-			<!-- OK, so this is ridiculous. Sue me. -->
+			<!-- OK, so this is ridiculous. Sue me. SVG failed. -->
 			<speaker>
 				<driver>
 					<surround>
@@ -34,6 +34,17 @@
 				<h1><abbr title="Behaviour Assertion Sheets">Bas.</abbr></h1>
 			</a>
 		</header>
+		<div class="navcontainer">
+			<nav>
+				<ul>
+					<li><a href="http://github.com/cgiffard/Behaviour-Assertion-Sheets">Get the Code @ Github</a></li>
+					<li><a href="#example">Code Example</a></li>
+					<li><a href="#gettingstarted">Getting Started</a></li>
+					<li><a href="#gettinginvolved">Getting Involved</a></li>
+					<li><a href="https://github.com/cgiffard/Behaviour-Assertion-Sheets#behaviour-assertion-sheets">Documentation</a></li>
+				</ul>
+			</nav>
+		</div>
 		<article main>
 			<section class="intro normal">
 				<h1>Bas. Client side integration testing made much less painful.</h1>
@@ -54,11 +65,13 @@
 						stacks - and help specify Bas as a defacto standard.
 					</p>
 				</div>
-				<pre class="illustrative col">
+				<pre class="illustrative col" id="example">
 <atrule>@page</atrule>   (<test>domain</test> = <comparison>"cgiffard.github.io"</comparison>)
-        (<test>page</test> = <comparison>"/Behaviour-Assertion-Sheets/"</comparison>) {
+        (<test>path</test> = <comparison>"/Behaviour-Assertion-Sheets/"</comparison>) {
     
-    <selector>h1</selector> {
+    <asssertion><test>status-code</test>: 200</assertion>;
+    
+    <selector>.intro h1</selector> {
         <comment>/* Don't want to experience any pain here! */</comment>
         <assertion><test>text</test>: <bareword>contains</bareword>(<barewordvalue>"less painful"</barewordvalue>)</assertion>;
     }
@@ -77,42 +90,43 @@
 					<img class="icon" src="images/icon-integrationtesting.svg" alt="Clipboard Icon" width="100" height="100"/>
 					<h3>Integration Testing</h3>
 					<p>
-						Plug Bas into your CI system to so you know when you've
-						introduced a bug or broken the build.
+						Plug Bas into your CI system to so you immediately know
+						when you've introduced a bug or broken the build.
 					</p>
-					<p><a href="/examples/integrationtesting">Integration testing example</a></p>
+					<!-- <p><a href="/examples/integrationtesting">Integration testing example</a></p> -->
 				</div>
 				<div class="col">
 					<img class="icon" src="images/icon-monitoring.svg" alt="Clipboard Icon" width="100" height="100"/>
-					<h3>Availability and Monitoring</h3>
+					<h3>Availability Monitoring</h3>
 					<p>
-						Know when your site/app is up, and serving content in
-						the way you'd expect.
+						Move beyond <code>if (503)</code> - and keep tabs on when your site
+						or app is up, and serving content in the way you'd expect.
 					</p>
-					<p><a href="/examples/monitoring">Service monitoring example</a></p>
+					<!-- <p><a href="/examples/monitoring">Service monitoring example</a></p> -->
 				</div>
 				<div class="col">
 					<img class="icon" src="images/icon-accessibility.svg" alt="Clipboard Icon" width="100" height="100"/>
-					<h3>Accessibility and Compliance</h3>
+					<h3>Accessibility Compliance</h3>
 					<p>
 						Automatically test for common accessibility pitfalls, or
 						poor code.
 					</p>
-					<p><a href="/examples/acessibility">Accessibility testing example</a></p>
+					<!-- <p><a href="/examples/acessibility">Accessibility testing example</a></p> -->
 				</div>
 				<div class="col">
 					<img class="icon" src="images/icon-reporting.svg" alt="Clipboard Icon" width="100" height="100"/>
-					<h3>Reporting and Aggregation</h3>
+					<h3>Reporting</h3>
 					<p>
-						Track out how your site/application is structured. Find and
+						Track out how your site or application is structured. Find and
 						analyse failures and quirks.
 					</p>
-					<p><a href="/examples/reporting">Reporting example</a></p>
+					<!-- <p><a href="/examples/reporting">Reporting example</a></p> -->
 				</div>
 			</section>
-			<section class="alternate">
+			<section class="alternate" id="#gettingstarted">
 				<h1>Getting started with Bas in your own projects</h1>
 				<div class="col">
+					<h2>Installing</h2>
 					<p>
 						Until somebody builds an additional Bas implementation, it
 						runs exclusively inside of <a href="http://nodejs.org/">node.js</a>,
@@ -131,52 +145,96 @@
 					</p>
 				</div>
 				<div class="col">
+					<h2>Writing &amp; running tests</h2>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						Before you can run tests, you'll need some tests to run!
 					</p>
+					<p>
+						If you'd like to dive straight into writing tests, there's
+						some examples in the repo you can work from. Alternately
+						the documentation offers a detailed guide to the grammar.
+					</p>
+					<p>
+						Then use the <code>bas</code> CLI to run them. The (general) syntax is:
+					</p>
+					<p>
+						<code>bas --sheet <strong>(your BAS sheet filename)</strong> [<strong>http://urltotest/</strong> ... ]</code>
+					</p>
+					<p>
+						You can also commence a crawl using the <code>--crawl</code>
+						option, or provide a list of URLS to be sequentially tested
+						instead. For a full list of options, run <code>bas -h</code>.
+					</p>
+					<h3>Try this for size</h3>
+					<p><em>Still</em> TL;DR? OK, try this.</p>
+					<pre>
+echo "
+    @all (content-type = /^text\/html/) {
+        status-code: 200;
+
+        img {
+            attribute(alt): required;
+        }
+    }
+" | bas -v -n 10 --crawl http://example.com/
+					</pre>
 					<h2>Integration with Travis & Jekins</h2>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						It is relatively easy to integrate Bas with Jenkins/Travis - just
+						plug a <code>bas</code> invocation into your Jenkins job/Travis test
+						scripts like you'd call out to anything else.
+					</p>
+					<p>
+						If you're writing a node project, and you have an existing
+						test suite, you're in luck. You don't have to shell out to
+						nothin'! Use the ultra-straightforward Node API to run
+						Bas tests inside your existing test framework (like mocha.)
 					</p>
 				</div>
 				<hr />
 			</section>
-			<section class="finally">
+			<section class="finally" id="gettinginvolved">
 				<h1>Get in touch, or contribute!</h1>
 				<div class="col">
+					<p>I'm <strong>Christopher Giffard</strong>.</p>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						You can find me on <a href="http://twitter.com/cgiffard">Twitter</a>
+						and <a href="http://alpha.app.net/cgiffard">ADN</a>. I'm
+						also readily contactable via email at [firstname] DOT [lastname] AT
+						cgiffard.com.
+					</p>
+					<p>
+						At the moment, I'm just one guy writing the best code I
+						think I can. It would be wonderful if you'd like to
+						contribute to the project - or especially write a Bas
+						implementation for another language!
 					</p>
 				</div>
 				<div class="col">
+					<h2>The Todo List (MVC and or otherwise)</h2>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						There's a few things that Bas really needs right now, if
+						you'd like to take a stab at them:
 					</p>
+					<ul>
+						<li>More tests in the test suite!</li>
+						<li>Alternate implementations</li>
+						<li>More assertion tests</li>
+						<li>Documentation clean-up and friendly-ification</li>
+						<li>It'd be cool if somebody wrote a cross-compiler for selenium</li>
+					</ul>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						Send me a pull request!
 					</p>
 				</div>
 				<hr />
 				<footer>
-					Copyright (c) 2013 Christopher Giffard. Released under the BSD Licence.
+					Copyright (c) 2013 Christopher Giffard.
+					<a href="https://github.com/cgiffard/Behaviour-Assertion-Sheets#licence">Released under the BSD Licence.</a>
 				</footer>
 			</section>
 		</article>
-		<script type="text/javascript" href="js/modernizr.js"></script>
+		<script type="text/javascript" src="js/modernizr.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

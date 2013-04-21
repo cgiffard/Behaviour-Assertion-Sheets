@@ -3,14 +3,8 @@ speaker, speaker * {
 }
 
 speaker {
-	position: absolute;
-	
-	width: 1200px;
 	height: 461px;
-	
-	margin-left: -600px;
-	left: 50%;
-	
+
 	background-color: #353535;
 	background-image: url("../images/grain.png"), url("../images/noise.png"), -webkit-gradient(radial, 50% 50%,0,50% 50%,200, from(hsl(0, 0%, 7%)), to(hsl(0, 0%, 21%)));
 	background-image: url("../images/grain.png"), url("../images/noise.png"), -webkit-radial-gradient(50% 50%, hsl(0, 0%, 21%), hsl(0, 0%, 7%));
@@ -30,6 +24,31 @@ speaker {
 	box-shadow: inset rgba(0,0,0,1) 0px 0px 5px,
 				inset rgba(0,0,0,1) 0px -7px 27px,
 				rgba(0,0,0,0.75) 0px 5px 5px;
+}
+
+driver {
+	-webkit-transform: scale(0.7);
+	-moz-transform: scale(0.7);
+	-ms-transform: scale(0.7);
+	-o-transform: scale(0.7);
+	transform: scale(0.7);
+}
+
+@media only screen and (min-width: 1200px) {
+	speaker {
+		position: absolute;
+		width: 1200px;
+		margin-left: -600px;
+		left: 50%;
+	}
+	
+	driver {
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		transform: scale(1);
+	}
 }
 
 driver, driver *, driver *:before, driver *:after {
