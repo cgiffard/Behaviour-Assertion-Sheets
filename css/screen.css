@@ -22,13 +22,18 @@ body {
 	background-image: -o-linear-gradient(top, hsl(0, 0%, 0%), hsl(0, 0%, 9%));
 	background-image: -ms-linear-gradient(top, hsl(0, 0%, 0%), hsl(0, 0%, 9%));
 	background-image: linear-gradient(top, hsl(0, 0%, 0%), hsl(0, 0%, 9%));
+	
+	background-size: 100% 400px;
+	background-repeat: no-repeat;
 }
 
 header {
 	height: 460px;
 	max-width: 1200px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	overflow: hidden;
 }
 
 a.logo {
@@ -74,6 +79,8 @@ h2 {
 	font-size: 2em;
 	color: #AAA;
 	font-weight: lighter;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
 }
 
 p {
@@ -82,15 +89,26 @@ p {
 	line-height: 2em;
 }
 
+code {
+	display: inline-block;
+	font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+	font-size: 1em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background-color: #222;
+	border: solid #333 1px;
+	border-radius: 0.4em;
+	line-height: 1.5em;
+}
+
 section {
-	margin-bottom: 8em;
+	margin-bottom: 4em;
 }
 
 article section h1 {
-	min-height: 4em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	width: 60%;
+	width: 50%;
 	text-shadow:hsla(333, 88%, 15%, 1) 1px 1px 0px,
 				hsla(333, 88%, 15%, 1) 2px 2px 0px,
 				hsla(333, 88%, 15%, 1) 3px 3px 0px,
@@ -104,11 +122,17 @@ article section.alternate h1 {
 				hsla(40, 88%, 15%, 1) 3px 3px 0px,
 				black 0px 0px 3px;
 	color: hsla(40, 88%, 50%, 1);
-	text-align: right;
 	
 	width: 100%;
-	padding-left: 40%;
-	padding-right: 1em;
+	padding-left: 50%;
+}
+
+article section.finally h1 {
+	text-shadow:hsla(160, 88%, 15%, 1) 1px 1px 0px,
+				hsla(160, 88%, 15%, 1) 2px 2px 0px,
+				hsla(160, 88%, 15%, 1) 3px 3px 0px,
+				black 0px 0px 3px;
+	color: hsla(160, 88%, 50%, 1);
 }
 
 section > p {
@@ -118,13 +142,12 @@ section > p {
 article section .col {
 	width: 50%;
 	float: left;
+	padding-right: 1em;
 }
 
 section.intermediate {
 	width: 100%;
 	padding: 2em;
-	margin-left: -2em;
-	margin-right: -2em;
 	border: solid rgba(255,255,255,0.09) 1px;
 	border-radius: 10px;
 	box-shadow: black 0px 2px 2px;
@@ -152,18 +175,18 @@ section > *:last-child:after {
 	position: absolute;
 }
 
-.col h3 {
+.fourcol .col h3 {
 	font-size: 1.5em;
 	min-height: 3em;
 	color: #a17500;
 }
 
-.col p:nth-child(odd) {
+.fourcol .col p:nth-child(odd) {
 	min-height: 8em;
 	font-size: 1.3em;
 }
 
-.col p:last-child {
+.fourcol .col p:last-child {
 	font-size: 1.3em;
 }
 
@@ -187,6 +210,7 @@ pre {
 	line-height: 1.7em;
 	padding-left: 1em;
 	margin-bottom: 4em;
+	overflow: hidden;
 }
 
 pre atrule {
@@ -218,4 +242,10 @@ pre barewordvalue, pre comparison {
 
 pre regex {
 	color: #b91620;
+}
+
+hr {
+	clear: both;
+	border: none;
+	border-top: dashed #222 1px;
 }

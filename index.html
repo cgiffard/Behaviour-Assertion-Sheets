@@ -36,13 +36,16 @@
 		</header>
 		<article main>
 			<section class="intro normal">
-				<h1>Bas. Client side integration testing made less painful.</h1>
+				<h1>Bas. Client side integration testing made much less painful.</h1>
 				<div class="col">
 					<p pain-level="0">
 						Behaviour Assertion Sheets are a new way to assert to a test
 						library how the front-end aspects of your website are intended
 						to fit together. The syntax is familiar to anybody who has
 						ever used CSS - simple, declarative, no cruft.
+					</p>
+					<p>
+						<strong>It's much less painful. It might even be fun.</strong>
 					</p>
 					<p>
 						Bas (pronounced &lsquo;bass&rsquo;) is written in JavaScript,
@@ -62,10 +65,11 @@
     
     <selector>section p.intro:nth-child(1)</selector> {
         <assertion><test>text</test>: <bareword>contains</bareword>(<barewordvalue>"simple"</barewordvalue>), <regex>/declarative/i</regex></assertion>;
-        <assertion><test>attribute(pain-level)</test>: <bareword>lt</bareword>(<barewordvalue>99999</barewordvalue>)</assertion>;
+        <assertion title="This assertion is definitely *never* going to fail."><test>attribute(pain-level)</test>: <bareword>lt</bareword>(<barewordvalue>99999</barewordvalue>)</assertion>;
     }
 }
 </pre>
+				<hr />
 			</section>
 			<section class="intermediate fourcol">
 				<h2>What can I use Bas for?</h2>
@@ -108,12 +112,69 @@
 			</section>
 			<section class="alternate">
 				<h1>Getting started with Bas in your own projects</h1>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-					sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
+				<div class="col">
+					<p>
+						Until somebody builds an additional Bas implementation, it
+						runs exclusively inside of <a href="http://nodejs.org/">node.js</a>,
+						so you'll need to have both it and npm installed and available.
+					</p>
+					<p>
+						(Fortunately, there's a lot of guides for that, so I doubt
+						you'll get stuck - if you're not already well on top of it!)
+					</p>
+					<p>
+						Then just do an <code>npm install -g bas</code> in your terminal.
+						A new <code>bas</code> command should be available to use anywhere!
+					</p>
+					<p>
+						I hope to have a screencast ready showing the basics soon.
+					</p>
+				</div>
+				<div class="col">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+					<h2>Integration with Travis & Jekins</h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+				</div>
+				<hr />
+			</section>
+			<section class="finally">
+				<h1>Get in touch, or contribute!</h1>
+				<div class="col">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+				</div>
+				<div class="col">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+						ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+				</div>
+				<hr />
+				<footer>
+					Copyright (c) 2013 Christopher Giffard. Released under the BSD Licence.
+				</footer>
 			</section>
 		</article>
 		<script type="text/javascript" href="js/modernizr.js"></script>
