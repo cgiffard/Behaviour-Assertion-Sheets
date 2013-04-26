@@ -1,5 +1,7 @@
 # Behaviour Assertion Sheets
 
+(For a friendlier overview, see http://bas.cgiffard.com/)
+
 Behaviour Assertion Sheets (Bas, pronounced 'base') are a way to describe how a
 web page fits together, make assertions about its structure and content, and be
 notified when these expectations are not met. It's a bit like selenium, if you've

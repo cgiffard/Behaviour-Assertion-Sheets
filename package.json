@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Behaviour Assertion Sheets: Stylesheet-like syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "commander": "~1.1.1",
-    "simplecrawler": "~0.1.6",
+    "simplecrawler": "~0.2.0",
     "csstree": "0.0.1",
     "request": "~2.16.6",
     "yoyaku": "0.0.12",
