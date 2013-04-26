@@ -1,4 +1,4 @@
-# Behaviour Assertion Sheets
+# Behaviour Assertion Sheets [![Build Status](https://travis-ci.org/cgiffard/Behaviour-Assertion-Sheets.png?branch=master)](https://travis-ci.org/cgiffard/Behaviour-Assertion-Sheets)
 
 (For a friendlier overview, see http://bas.cgiffard.com/)
 
