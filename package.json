@@ -36,6 +36,7 @@
     "yoyaku": "0.0.12",
     "cheerio": "~0.10.8",
     "colors": "~0.6.0-1",
-    "async": "~0.2.7"
+    "async": "~0.2.7",
+    "text-statistics": "~0.1.0"
   }
 }
