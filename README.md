@@ -186,6 +186,47 @@ represented:
 
 	attribute(role): "main";
 
+##### Subject Transformations
+
+The value of an assertion test function can be subsequently transformed by special
+functions known as [transform functions](#transform-functions).
+
+These can be chained against the value of an assertion test using the delimiter `.`.
+
+Purely for illustrative purposes, here's an example of using transform functions
+(fictitious... for now) to rot-13 text from a node before validating the assertion:
+
+	h1 {
+		text.rot13: /* some match here... */
+	}
+
+Multiple transforms can be applied:
+
+	h1 {
+		text.rot13.rot13: /* text is back to normal! */
+	}
+	
+And arguments can be provided to transform functions, just like to the subject test
+itself.
+
+	h1 {
+		text.rot(13): /* some match here... */
+		text.rot(13).rot(13): /* some match here... */
+	}
+	
+A more realistic use-case can be found in the text-statistics functions. If you
+want to check the flesch-kincaid reading ease of a given node, you could use:
+
+	h1 {
+		text.flesch-kincaid-reading-ease: gte(80);
+	}
+
+You could check the reading-ease of the alt-text on an image, too:
+
+	img {
+		attribute(alt).flesch-kincaid-reading-ease: gte(80);
+	}
+
 #### Barewords
 
 The right-hand side of the assertion, as well as regular expression, numeric, and
@@ -319,6 +360,36 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the value of the specified attribute from a given node.
 *	**count**
 	Returns the number of nodes that matched a given selector.
+	
+#### Transform Functions
+
+*	**flesch-kincaid-reading-ease**
+	Returns the readability score (according to the flesch-kincaid reading ease
+	scale) of the input text.
+*	**flesch-kincaid-grade-level**
+	Returns the readability score (according to the flesch-kincaid US grade level
+	scale) of the input text.
+*	**gunning-fog-score**
+	Returns the readability score (according to the gunning-fog scale) of the
+	input text.
+*	**coleman-liau-index**
+	Returns the readability score (according to the coleman-liau index) of the
+	input text.
+*	**smog-index**
+	Returns the readability score (according to the SMOG index) of the input text.
+*	**automated-readability-index**
+	Returns the readability score (according to the automated readability index)
+	of the input text.
+*	**letter-count**
+	Returns the number of latin letters in the text.
+*	**sentence-count**
+	Returns the number of sentences in the text (for latin languages.)
+*	**word-count**
+	Returns the number of words in the input text (for latin languages.)
+*	**average-words-per-sentence**
+	Returns the average number of words in each sentence in the input text.
+*	**average-syllables-per-word**
+	Returns the average number of syllables per word in the input text.
 
 ### Bareword Functions
 
@@ -416,6 +487,10 @@ get a list of options by typing `bas -h` at the prompt.)
 * `-q`, `--quiet` Suppress output (prints final report/json only)
 * `-v`, `--verbose` Verbose output
 * `-j`, `--json` Output list of errors/test results as JSON
+
+The exit value from the CLI is equivalent to the number of errors that occurred
+when the test suite was run. If no errors occurred, of course, the exit value is
+zero.
 
 ## Bas Node.js API
 
@@ -581,7 +656,7 @@ more information.
 
 *	Better documentation for rulesets, assertions, selector objects
 *	Asynchronous test support
-*	Comprehensive test suite
+*	Comprehensive test suite (this is steadily improving!)
 *	Very solid cleanup
 *	Load in HTML/XML to test against from disk using `bas` CLI tool
 *	Lots more test functions (for conditions and assertions)
