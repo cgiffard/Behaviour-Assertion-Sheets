@@ -11,13 +11,18 @@
 	}
 	
 	img {
-		attribute(alt): true;
+		attribute(alt): required;
+		attribute(alt).flesch-kincaid-grade-level: lte(10);
 		count: 3;
 	}
 	
 	img[src*="akamai"] {
 		required: true;
 		count: 3;
+	}
+	
+	p {
+		text.flesch-kincaid-grade-level: lte(10);
 	}
 }
 

@@ -19,7 +19,7 @@
 	
 	/*@ Test Accessibility Check */
 	h1, h2, h3, h4, h5, h6, p {
-		text.fleschKincaidGradeLevel: lte(10);
+		text.flesch-kincaid-grade-level: lte(10);
 	}
 	
 	img {
@@ -28,7 +28,8 @@
 	}
 	
 	a {
-		/* attribute(title): forbidden; */
+		attribute(title): forbidden;
+		attribute(target): forbidden;
 	}
 	
 	/*@ Inline Styles (we don't want them!) */
