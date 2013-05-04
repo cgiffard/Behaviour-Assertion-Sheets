@@ -13,7 +13,8 @@ You could:
 	are on sale](http://github.com/cgiffard/WWDC-Alerts), or your local postal
 	service to tell you when a package has been delivered
 *	Scan your site for common accessibility pitfalls, such as missing alt tags
-	on images, poor heading order, etc.
+	on images, poor heading order, or even check for hard-to-read copy with the
+	inbuilt readability tests!
 *	Monitor for service availability and downtime
 *	Integration testing and integrity verification (plug Bas into jenkins or travis!)
 *	Use BAS inside of an existing test framework like Mocha to verify output,
@@ -576,7 +577,7 @@ more information.
 
 ## Roadmap
 
-#### Next Version
+#### Next Version/s
 
 *	Better documentation for rulesets, assertions, selector objects
 *	Asynchronous test support
@@ -584,6 +585,7 @@ more information.
 *	Very solid cleanup
 *	Load in HTML/XML to test against from disk using `bas` CLI tool
 *	Lots more test functions (for conditions and assertions)
+*	Support for assertion-specific error severity
 
 #### Further down the road
 

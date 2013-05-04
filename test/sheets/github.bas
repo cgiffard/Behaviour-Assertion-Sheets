@@ -21,7 +21,9 @@
 		count: 3;
 	}
 	
+	/*@ All paragraphs */
 	p {
+		/*@ Paragraph text should be readable by persons with a grade 10 or higher level of education. */
 		text.flesch-kincaid-grade-level: lte(10);
 	}
 }
