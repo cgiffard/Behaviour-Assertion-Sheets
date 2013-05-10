@@ -154,6 +154,8 @@ describe("Default bareword",function() {
 			barewords.contains("abcdefghijk","dfe").should.be.false;
 			barewords.contains("abc","cba").should.be.false;
 			
+			barewords.contains("text/html","text/html").should.be.true;
+			
 		});
 	});
 });
