@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "commander": "~1.1.1",
-    "simplecrawler": "~0.2.2",
+    "simplecrawler": "~0.2.6",
     "csstree": "0.0.1",
     "request": "~2.21.0",
     "yoyaku": "0.0.12",
