@@ -26,7 +26,8 @@
   "license": "BSD",
   "devDependencies": {
     "chai": "~1.5.0",
-    "mocha": "~1.9.0"
+    "mocha": "~1.9.0",
+    "jshint": "~2.0.1"
   },
   "dependencies": {
     "commander": "~1.1.1",
@@ -37,7 +38,6 @@
     "cheerio": "~0.11.0",
     "colors": "~0.6.0-1",
     "async": "~0.2.8",
-    "text-statistics": "~0.1.1",
-    "jshint": "~2.0.1"
+    "text-statistics": "~0.1.1"
   }
 }
