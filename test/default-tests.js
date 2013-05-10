@@ -160,72 +160,98 @@ describe("Default assertion test",function() {
 		});
 	});
 	
-	describe("required",function() {
-		it("should return true if the node is present",function() {
+	describe("body",function() {
+		it("should return the body of the requested resource as a string.",function() {
 			var documentState = {
-				"document": cheerio.load("<html><title>Example title to extract</title></html>")
+				"data": "ABC123"
 			};
 			
-			var node = documentState.document("title").eq(0);
-			
-			tests.required(documentState,node)
-				.should.equal(true);
+			tests.body(documentState)
+				.should.equal("ABC123");
 		});
 	});
 	
-	describe("text",function() {
-		it("should return the text of the given node",function() {
-			var documentState = {
-				"document": cheerio.load("<html><title>Example title to extract</title></html>")
-			};
-			
-			var node = documentState.document("title").eq(0);
-			
-			tests.text(documentState,node)
-				.should.equal("Example title to extract");
+	describe("Node specific tests",function() {
+		
+		describe("required",function() {
+			it("should return true if the node is present",function() {
+				var documentState = {
+					"document": cheerio.load("<html><title>Example title to extract</title></html>")
+				};
+				
+				var node = documentState.document("title").eq(0);
+				
+				tests.required(documentState,node)
+					.should.equal(true);
+			});
+		});
+		
+		describe("text",function() {
+			it("should return the text of the given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html><title>Example title to extract</title></html>")
+				};
+				
+				var node = documentState.document("title").eq(0);
+				
+				tests.text(documentState,node)
+					.should.equal("Example title to extract");
+			});
+		});
+		
+		describe("html",function() {
+			it("should return the inner html source of the given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html><title><strong><em>Example title</em> to extract</strong></title></html>")
+				};
+				
+				var node = documentState.document("title").eq(0);
+				
+				tests.html(documentState,node)
+					.should.equal("<strong><em>Example title</em> to extract</strong>");
+			});
+		});
+		
+		describe("attribute",function() {
+			it("should return the attribute value for a given attribute of a given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html lang=en><title>Example title to extract</title></html>")
+				};
+				
+				var node = documentState.document("html").eq(0);
+				
+				// Successful attribute extraction
+				tests.attribute(documentState,node,"lang")
+					.should.equal("en");
+				
+				// Should throw error if we don't get an attribute
+				chai.expect(function() {
+						tests.attribute(documentState,node)
+					}).to.throw(Error);
+				
+				// Should return false if we don't have a node
+				tests.attribute(documentState,null,"test")
+					.should.be.false;
+				
+				// Should return false if this node doesn't have the attribute asked for...
+				tests.attribute(documentState,node,"test")
+					.should.be.false;
+			});
+		});
+		
+		describe("count",function() {
+			it("should return the number of nodes matched by a given selector",function() {
+				var documentState = {
+					"selectionLength": 20
+				};
+				
+				
+				tests.count(documentState)
+					.should.equal(20);
+				
+				tests.count({})
+					.should.equal(0);
+			});
 		});
 	});
-	
-	describe("attribute",function() {
-		it("should return the attribute value for a given attribute of a given node",function() {
-			var documentState = {
-				"document": cheerio.load("<html lang=en><title>Example title to extract</title></html>")
-			};
-			
-			var node = documentState.document("html").eq(0);
-			
-			// Successful attribute extraction
-			tests.attribute(documentState,node,"lang")
-				.should.equal("en");
-			
-			// Should throw error if we don't get an attribute
-			chai.expect(function() {
-					tests.attribute(documentState,node)
-				}).to.throw(Error);
-			
-			// Should return false if we don't have a node
-			tests.attribute(documentState,null,"test")
-				.should.be.false;
-			
-			// Should return false if this node doesn't have the attribute asked for...
-			tests.attribute(documentState,node,"test")
-				.should.be.false;
-		});
-	});
-	
-	describe("count",function() {
-		it("should return the number of nodes matched by a given selector",function() {
-			var documentState = {
-				"selectionLength": 20
-			};
-			
-			
-			tests.count(documentState)
-				.should.equal(20);
-			
-			tests.count({})
-				.should.equal(0);
-		});
-	});
-	
 });
