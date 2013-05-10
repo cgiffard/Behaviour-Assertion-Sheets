@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "cheerio": "~0.11.0",
     "colors": "~0.6.0-1",
     "async": "~0.2.8",
-    "text-statistics": "~0.1.1"
+    "text-statistics": "~0.1.1",
+    "jshint": "~2.0.1"
   }
 }
