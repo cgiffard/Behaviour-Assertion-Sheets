@@ -390,6 +390,10 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the average number of words in each sentence in the input text.
 *	**average-syllables-per-word**
 	Returns the average number of syllables per word in the input text.
+*	**length**
+	Returns the `.length` property of the input.
+*	**type**
+	Returns the JS type of the input (as reported by typeof, so quirks abound.)
 
 ### Bareword Functions
 
