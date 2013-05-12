@@ -363,6 +363,8 @@ Tests can also be added programatically. [See the API documentation for details.
 	
 #### Transform Functions
 
+##### Text related
+
 *	**flesch-kincaid-reading-ease**
 	Returns the readability score (according to the flesch-kincaid reading ease
 	scale) of the input text.
@@ -390,6 +392,9 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the average number of words in each sentence in the input text.
 *	**average-syllables-per-word**
 	Returns the average number of syllables per word in the input text.
+
+#### General Transformations
+
 *	**length**
 	Returns the `.length` property of the input.
 *	**type**
