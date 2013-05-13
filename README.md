@@ -393,7 +393,7 @@ Tests can also be added programatically. [See the API documentation for details.
 *	**average-syllables-per-word**
 	Returns the average number of syllables per word in the input text.
 
-#### General Transformations
+##### General Transformations
 
 *	**length**
 	Returns the `.length` property of the input.
