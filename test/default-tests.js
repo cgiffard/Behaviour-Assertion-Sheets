@@ -224,7 +224,7 @@ describe("Default assertion test",function() {
 				tests.attribute(documentState,node,"lang")
 					.should.equal("en");
 				
-				// Should throw error if we don't get an attribute
+				// Should throw error if we don't get an attribute name to check
 				chai.expect(function() {
 						tests.attribute(documentState,node)
 					}).to.throw(Error);
@@ -236,6 +236,30 @@ describe("Default assertion test",function() {
 				// Should return false if this node doesn't have the attribute asked for...
 				tests.attribute(documentState,node,"test")
 					.should.be.false;
+			});
+		});
+		
+		describe("has-attribute",function() {
+			it("should return whether an attribute is present for a given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html lang='en' test=''></html>")
+				};
+				
+				var node = documentState.document("html").eq(0);
+				
+				tests["has-attribute"](documentState,node,"lang")
+					.should.be.true;
+				
+				tests["has-attribute"](documentState,node,"test")
+					.should.be.true;
+					
+				tests["has-attribute"](documentState,node,"missing")
+					.should.be.false;
+				
+				// Should throw error if we don't get an attribute name to check
+				chai.expect(function() {
+						tests["has-attribute"](documentState,node)
+					}).to.throw(Error);
 			});
 		});
 		
