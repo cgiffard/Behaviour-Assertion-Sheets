@@ -5,7 +5,7 @@ describe("General BAS API",function() {
 	
 	it("should be able to be required",function() {
 		var BAS = require("../");
-	})
+	});
 	
 	it("should be able to be instantiated",function() {
 		var BAS = require("../"),

@@ -1,6 +1,6 @@
 
 /*@ Page selected by regex */
-@page (url =~ /^\/user\/[0-9]+/i) {
+@page (url =~ /^\/user\/[0-9]+/i) (url != /user/1) {
 	
 	h1 {
 		count: 1;
