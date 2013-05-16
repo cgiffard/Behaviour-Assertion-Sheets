@@ -358,6 +358,8 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the text from a given node.
 *	**attribute** (attribute name)
 	Returns the value of the specified attribute from a given node.
+*	**has-attribute** (attribute name)
+	Returns true if the specified attribute is present - false if not.
 *	**count**
 	Returns the number of nodes that matched a given selector.
 	
@@ -412,8 +414,6 @@ can have arguments.
 *	**exists**
 	Synonym for true. (Can make sheets more readable.)
 *	**required**
-	Synonym for true. (Can make sheets more readable.)
-*	**exists**
 	Synonym for true. (Can make sheets more readable.)
 *	**forbidden**
 	Synonym for false. (Can make sheets more readable.)
