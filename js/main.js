@@ -50,7 +50,7 @@
 			var target = document.querySelector(this.getAttribute("href"))
 				targetOffset = getElementOffset(target);
 			
-			document.body.scrollTop = targetOffset - 100;
+			window.scrollTo(0,targetOffset - 100);
 			
 			return false;
 		}
