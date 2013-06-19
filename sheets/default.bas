@@ -44,7 +44,7 @@
 @page (status-code =~ /[45]\d+/) { status-code: 200; }
 
 /*@ Check to see whether pages are being transferred with the correct MIME types */
-@page (url =~ /\.css$/i)	{ content-type: "text/css";			}
-@page (url =~ /\.js$/i)		{ content-type: "text/javascript";	}
-@page (url =~ /\.mp4$/i)	{ content-type: "video/mp4";		}
-@page (url =~ /\.webm$/i)	{ content-type: "video/webm";		}
+@page (url =~ /\.css$/i)	{ content-type: contains("text/css");			}
+@page (url =~ /\.js$/i)		{ content-type: contains("text/javascript");	}
+@page (url =~ /\.mp4$/i)	{ content-type: contains("video/mp4");		}
+@page (url =~ /\.webm$/i)	{ content-type: contains("video/webm");		}

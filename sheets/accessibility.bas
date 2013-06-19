@@ -26,7 +26,7 @@
 	
 	/*@ No MS word tags */
 	article {
-		html: !contains("mso"), !contains("\'"), !contains("\"");
+		html: !contains("mso");
 	}
 	
 	/*@ Test Accessibility Check */
