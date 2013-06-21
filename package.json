@@ -9,7 +9,7 @@
   "bin": {
     "bas": "lib/cli.js"
   },
-  "repository": "",
+  "repository": "https://github.com/cgiffard/Behaviour-Assertion-Sheets.git",
   "keywords": [
     "test",
     "css",
