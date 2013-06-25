@@ -1,0 +1,8 @@
+{
+	"ignore": [
+		".git/",
+		"test/",
+		"sheets/",
+		"node_modules/"
+	]
+}

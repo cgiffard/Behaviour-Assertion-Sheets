@@ -40,6 +40,14 @@ describe("Statement Parser",function() {
 		parser("/a b c d/ig /[a-z]([0-9])/")[1].should.equal("/[a-z]([0-9])/");
 	});
 	
+	it("should be able to parse complex regular expression values",function() {
+		parser("/^[\\d\\:]+$/, longer-than(0)").length.should.equal(2);
+		parser("/^[\\d\\:]+$/, longer-than(0)")[0].should.equal("/^[\\d\\:]+$/");
+		
+		parser("required, /^video\\/(mp4|webm)$/").length.should.equal(2);
+		parser("required, /^video\\/(mp4|webm)$/")[1].should.equal("/^video\\/(mp4|webm)$/");
+	});
+	
 	it("should be able to parse negated regular expression values",function() {
 		parser("!/a b c d/ig").length.should.equal(1);
 		parser("!/a b c d/ig")[0].should.equal("!/a b c d/ig");
