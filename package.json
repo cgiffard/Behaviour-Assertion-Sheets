@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
@@ -32,7 +32,7 @@
   "dependencies": {
     "commander": "~1.1.1",
     "simplecrawler": "~0.2.6",
-    "csstree": "0.0.1",
+    "csstree": "git://github.com/cgiffard/CSSTree.git#master",
     "request": "~2.21.0",
     "yoyaku": "0.0.12",
     "cheerio": "~0.11.0",
