@@ -4,7 +4,8 @@
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for required behaviour.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha -R spec -t 10000"
+    "test": "mocha -R spec -t 10000",
+    "coverage": "test/coverage.sh"
   },
   "bin": {
     "bas": "lib/cli.js"
@@ -27,7 +28,9 @@
   "devDependencies": {
     "chai": "~1.5.0",
     "mocha": "~1.9.0",
-    "jshint": "~2.0.1"
+    "jshint": "~2.0.1",
+    "mocha-istanbul": "~0.2.0",
+    "istanbul": "~0.1.37"
   },
   "dependencies": {
     "commander": "~1.2.0",
