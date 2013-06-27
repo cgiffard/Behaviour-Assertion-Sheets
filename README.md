@@ -688,6 +688,10 @@ To run the test suite, use:
 	
 ### Test Coverage
 
+Test coverage is generated with [istanbul](http://gotwarlost.github.io/istanbul/).
+
+To generate current statistics, run `npm run-script coverage` from the Bas directory.
+
 <table>
 	<thead>
 		<tr>
