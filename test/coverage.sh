@@ -7,7 +7,7 @@ istanbul instrument lib -o lib-conv &&
 	rm -rf lib &&
 	mv lib-unconv lib;
 
-if which open
+if which open &>/dev/null
 then
 	open html-report/index.html;
 fi

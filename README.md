@@ -685,6 +685,27 @@ it out as comprehensively as possible.
 To run the test suite, use:
 
 	npm test
+	
+### Test Coverage
+
+<table>
+	<thead>
+		<tr>
+		   <th>Statements</th>
+		   <th>Branches</th>
+		   <th>Functions</th>
+		   <th>Lines</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>86.09% (458/532)</td>
+			<td>75.19% (203/270)</td>
+			<td>86.4% (108/125)</td>
+			<td>86.96% (440/506)</td>
+		</tr>
+	</tbody>
+</table>
 
 ## Licence
 
