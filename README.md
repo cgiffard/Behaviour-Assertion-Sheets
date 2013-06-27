@@ -610,6 +610,17 @@ This function returns an object with promise handlers: `yep` for success, and `n
 for failure. See the [yoyaku](http://github.com/cgiffard/yoyaku) documentation for
 more information.
 
+#### `BAS.parseSheet` (buffer sheetData | string sheetData)
+
+Takes a string or a buffer containing Bas rules, and parses it, adding the
+processed rules to the test suite object.
+
+These rules can be accessed via [`BAS.rules`](#basrules-property).
+
+This function returns an object with promise handlers: `yep` for success, and `nope`
+for failure. See the [yoyaku](http://github.com/cgiffard/yoyaku) documentation for
+more information.
+
 #### `BAS.registerTest`(string testName, function test)
 
 Registers a test in the `BAS.test` object map - and makes it available to Bas
