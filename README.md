@@ -23,8 +23,6 @@ You could:
 Anybody who has ever used CSS can use Bas - the [syntax is easy and familiar.]
 (#sheet-syntax)
 
-**Warning: This is an alpha-ish release. There might be bugs. Sorry!**
-
 ## Installing
 
 This first implementation of Bas is built with [node.js](http://nodejs.org), so
