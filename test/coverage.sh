@@ -1,9 +1,9 @@
 #!/bin/sh
 
-istanbul instrument lib -o lib-conv &&
+istanbul instrument lib -o lib-conv --no-compact --embed-source &&
 	mv lib lib-unconv &&
 	mv lib-conv lib &&
-	mocha -R mocha-istanbul -t 10000 &&
+	mocha -R mocha-istanbul -t 10000 -i -g JSHint &&
 	rm -rf lib &&
 	mv lib-unconv lib;
 
