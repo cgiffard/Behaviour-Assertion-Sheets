@@ -1,37 +1,112 @@
 @page (content-type =~ /^text\/html/i) {
 	
-	img {
+	#content img {
 		attribute(alt): required, longer-than(5), shorter-than(80);
-		/* attribute(alt).flesch-kincaid-grade-level: lte(11); */
 	}
 	
-	article * {
+	
+	#content table {
+		
+		attribute(summary): required;
+		
+		#content table thead {
+			required: true;
+		}
+		
+	}
+	
+	#content * {
 		attribute(style): forbidden;
+		attribute(alink): forbidden;
+		attribute(align): forbidden;
+		attribute(background): forbidden;
+		attribute(bgcolor): forbidden;
+		attribute(border): forbidden;
+		attribute(color): forbidden;
+		attribute(compact): forbidden;
+		attribute(face): forbidden;
+		attribute(hspace): forbidden;
+		attribute(language): forbidden;
+		attribute(link): forbidden;
+		attribute(noshade): forbidden;
+		attribute(nowrap): forbidden;
+		attribute(start): forbidden;
+		attribute(text): forbidden;
+		attribute(version): forbidden;
+		attribute(vlink): forbidden;
+		attribute(vspace): forbidden;
 	}
 	
-	/*@ If a heading 2 is present, a heading 1 must be */
-	article h2 {
-		article h1 { required: true; }
+	td {
+		attribute(width): forbidden;
 	}
 	
-	/*@ If a heading 3 is present, a heading 2 must be */
-	article h3 {
-		article h2 { required: true; }
+	#content object,
+	#content embed {
+		required: forbidden;
 	}
 	
-	/*@ If a heading 4 is present, a heading 3 must be */
-	article h4 {
-		article h3 { required: true; }
+	/* Can't think of a good reason to have unsemantic tags or style related in content. */
+	#content link,
+	#content style,
+	#content script {
+		required: forbidden;
 	}
 	
-	/*@ No MS word tags */
-	article {
-		html: !contains("mso");
+	/* Spans which do not serve a specific purpose */
+	#content span:not([class]) {
+		required: forbidden;
 	}
 	
-	/*@ Test Accessibility Check */
-	/*h1, h2, h3, h4, h5, h6, p {
-		text.flesch-kincaid-grade-level: lte(11);
-	}*/
+	/* Divs which do not serve a specific purpose */
+	#content div:not([id]):not([itemprop]):not([itemscope]):not([class]) {
+		required: forbidden;
+	}
 	
+	/* Person Divs */
+	div.person {
+		has-attribute(itemscope): true;
+		attribute(itemscope).length: 0;
+		attribute(itemtype): "http://schema.org/Person";
+		
+		$this img {
+			required: true;
+			has-attribute(itemprop): required;
+			attribute(itemprop): "image";
+		}
+		
+		$this h3 {
+			required: true;
+			has-attribute(itemprop): required;
+			attribute(itemprop): "name";
+		}
+	}
+	
+	/* You shouldn't be using two BRs in a row. Use a damn paragraph. */
+	#content br + br {
+		required: forbidden;
+	}
+	
+	/* Old stuff from HTML */
+	#content font,
+	#content applet,
+	#content basefont,
+	#content center,
+	#content dir,
+	#content i,
+	#content b,
+	#content layer {
+		required: forbidden;
+	}
+	
+	/* JavaScript & file links */
+	#content * {
+		attribute(href): !/javascript\:/ig !/file\:/ig;
+		attribute(src): !/javascript\:/ig !/file\:/ig;
+	}
+	
+	/* Links */
+	#content a {
+		attribute(target): forbidden;
+	}
 }
