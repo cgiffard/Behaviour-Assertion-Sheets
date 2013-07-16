@@ -157,7 +157,7 @@
 		
 		/*@ Malformed Class attribute */
 		$this [class] {
-			attribute(class): /^[a-z0-9\-\s]*$/ig;
+			attribute(class): /^[a-z0-9\-\_\s]*$/i;
 		}
 		
 		/*@ Title must not be present on elements with alt text */
@@ -166,13 +166,19 @@
 		}
 		
 		/* We've gotta have a title on inputs if a label isn't present, and visa versa */
+		/*@ Form fields without label must have a title */
 		$this input:not([id]):not([type=hidden]) {
 			attribute(title): required;
 		}
 		
-		$this input:not([title]):not([type=hidden]) {
+		/*@ Form fields without title must have a label */
+		$this input:not([title]):not([type=hidden]):not([type=submit]):not([type=text]),
+		$this textarea:not([title]),
+		$this select:not([title]) {
+			
 			attribute(id): required;
 			
+			/*@ Form fields without title must have a label */
 			label[for=$(attribute(id))$] {
 				required: true;
 			}
