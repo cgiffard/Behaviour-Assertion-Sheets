@@ -263,12 +263,28 @@ describe("Default assertion test",function() {
 			});
 		});
 		
+		describe("depth",function() {
+			it("should properly return the nesting depth of a given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html><div><div><div><div><span></span></div></div></div></div></html>")
+				};
+				
+				var node = documentState.document("span").eq(0);
+				
+				tests.depth(documentState,node)
+					.should.equal(6);
+				
+				// Should return false if we don't get a node
+				tests.depth(documentState)
+					.should.be.false;
+			});
+		});
+		
 		describe("count",function() {
 			it("should return the number of nodes matched by a given selector",function() {
 				var documentState = {
 					"selectionLength": 20
 				};
-				
 				
 				tests.count(documentState)
 					.should.equal(20);

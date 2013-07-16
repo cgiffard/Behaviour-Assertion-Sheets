@@ -1,112 +1,181 @@
-@page (content-type =~ /^text\/html/i) {
+@page (content-type =~ /^text\/html/i) (status-code = 200) {
 	
-	#content img {
-		attribute(alt): required, longer-than(5), shorter-than(80);
-	}
+	/*@ Check for bad dates */
+	text: !/1 January\,* 1970/ig;
 	
-	
-	#content table {
+	/*@ Content region */
+	#content {
 		
-		attribute(summary): required;
+		/*@ Text accessibility requirements */
+		text.flesch-kincaid-grade-level: lte(9);
 		
-		#content table thead {
-			required: true;
-		}
-		
-	}
-	
-	#content * {
-		attribute(style): forbidden;
-		attribute(alink): forbidden;
-		attribute(align): forbidden;
-		attribute(background): forbidden;
-		attribute(bgcolor): forbidden;
-		attribute(border): forbidden;
-		attribute(color): forbidden;
-		attribute(compact): forbidden;
-		attribute(face): forbidden;
-		attribute(hspace): forbidden;
-		attribute(language): forbidden;
-		attribute(link): forbidden;
-		attribute(noshade): forbidden;
-		attribute(nowrap): forbidden;
-		attribute(start): forbidden;
-		attribute(text): forbidden;
-		attribute(version): forbidden;
-		attribute(vlink): forbidden;
-		attribute(vspace): forbidden;
-	}
-	
-	td {
-		attribute(width): forbidden;
-	}
-	
-	#content object,
-	#content embed {
-		required: forbidden;
-	}
-	
-	/* Can't think of a good reason to have unsemantic tags or style related in content. */
-	#content link,
-	#content style,
-	#content script {
-		required: forbidden;
-	}
-	
-	/* Spans which do not serve a specific purpose */
-	#content span:not([class]) {
-		required: forbidden;
-	}
-	
-	/* Divs which do not serve a specific purpose */
-	#content div:not([id]):not([itemprop]):not([itemscope]):not([class]) {
-		required: forbidden;
-	}
-	
-	/* Person Divs */
-	div.person {
-		has-attribute(itemscope): true;
-		attribute(itemscope).length: 0;
-		attribute(itemtype): "http://schema.org/Person";
-		
+		/*@ Image alt-text requirements */
 		$this img {
-			required: true;
-			has-attribute(itemprop): required;
-			attribute(itemprop): "image";
+			attribute(alt): required, longer-than(5), shorter-than(80);
+			attribute(alt).flesch-kincaid-grade-level: lte(9);
 		}
 		
-		$this h3 {
-			required: true;
-			has-attribute(itemprop): required;
-			attribute(itemprop): "name";
+		/*@ Table semantics */
+		$this table {
+			
+			attribute(summary): required;
+			
+			$node table thead {
+				required: true;
+			}
+			
 		}
-	}
-	
-	/* You shouldn't be using two BRs in a row. Use a damn paragraph. */
-	#content br + br {
-		required: forbidden;
-	}
-	
-	/* Old stuff from HTML */
-	#content font,
-	#content applet,
-	#content basefont,
-	#content center,
-	#content dir,
-	#content i,
-	#content b,
-	#content layer {
-		required: forbidden;
-	}
-	
-	/* JavaScript & file links */
-	#content * {
-		attribute(href): !/javascript\:/ig !/file\:/ig;
-		attribute(src): !/javascript\:/ig !/file\:/ig;
-	}
-	
-	/* Links */
-	#content a {
-		attribute(target): forbidden;
+		
+		/*@ Banned (invalid) attributes */
+		$this * {
+			attribute(style): forbidden;
+			attribute(alink): forbidden;
+			attribute(align): forbidden;
+			attribute(background): forbidden;
+			attribute(bgcolor): forbidden;
+			attribute(border): forbidden;
+			attribute(color): forbidden;
+			attribute(compact): forbidden;
+			attribute(face): forbidden;
+			attribute(hspace): forbidden;
+			attribute(language): forbidden;
+			attribute(link): forbidden;
+			attribute(noshade): forbidden;
+			attribute(nowrap): forbidden;
+			attribute(start): forbidden;
+			attribute(text): forbidden;
+			attribute(version): forbidden;
+			attribute(vlink): forbidden;
+			attribute(vspace): forbidden;
+		}
+		
+		/*@ Banned table attributes */
+		$this table,
+		$this table * {
+			attribute(width): forbidden;
+			attribute(height): forbidden;
+		}
+		
+		/*@ Banned plugins in content */
+		$this object,
+		$this embed,
+		$this iframe {
+			required: forbidden;
+		}
+		
+		/*	Can't think of a good reason to have unsemantic tags or style
+			related crap in content. */
+		
+		/*@ Style or behavior in content */
+		$this link,
+		$this style,
+		$this script {
+			required: forbidden;
+		}
+		
+		/* Spans which do not serve a specific purpose */
+		/*@ Unsemantic tag */
+		$this span:not([class]) {
+			required: forbidden;
+		}
+		
+		/* Divs which do not serve a specific purpose */
+		/*@ Unsemantic tag */
+		$this div:not([id]):not([itemprop]):not([itemscope]):not([class]) {
+			required: forbidden;
+		}
+		
+		/* Person Divs */
+		/*@ Person */
+		$this div.person {
+			has-attribute(itemscope): true;
+			attribute(itemscope).length: 0;
+			attribute(itemtype): "http://schema.org/Person";
+			
+			/*@ Person images */
+			$node img {
+				has-attribute(itemprop): required;
+				attribute(itemprop): "image";
+			}
+			
+			/*@ Person name */
+			$node h3,
+			$node h2 {
+				required: true;
+				has-attribute(itemprop): required;
+				attribute(itemprop): "name";
+			}
+		}
+		
+		/* You shouldn't be using two BRs in a row. Use a damn paragraph. */
+		/*@ Unsemantic and improper use of line breaks */
+		$this br + br {
+			required: forbidden;
+		}
+		
+		/* Old stuff from HTML */
+		/*@ Deprecated and invalid HTML tags */
+		$this font,
+		$this applet,
+		$this basefont,
+		$this center,
+		$this dir,
+		$this i,
+		$this b,
+		$this layer {
+			required: forbidden;
+		}
+		
+		/* JavaScript & file links */
+		/*@ Banned JavaScript or file links in attribute */
+		$this * {
+			attribute(href): !/javascript\:/ig !/file\:/ig;
+			attribute(src): !/javascript\:/ig !/file\:/ig;
+		}
+		
+		/* Links */
+		/*@ Links must not open in a new window (accessibility) */
+		$this a {
+			attribute(target): forbidden;
+		}
+		
+		/* Reasonable limits on nesting depth */
+		/*@ Bad nesting (malformed document) */
+		$this * {
+			depth: lte(20);
+		}
+		
+		/*@ Malformed ID attribute */
+		$this [id] {
+			attribute(id): /^[a-z][a-z0-9\-]*$/i;
+			
+			/*@ Duplicate ID attribute */
+			[id=$(attribute(id))$] {
+				count: 1;
+			}
+		}
+		
+		/*@ Malformed Class attribute */
+		$this [class] {
+			attribute(class): /^[a-z0-9\-\s]*$/ig;
+		}
+		
+		/*@ Title must not be present on elements with alt text */
+		$this [alt] {
+			has-attribute(title): forbidden;
+		}
+		
+		/* We've gotta have a title on inputs if a label isn't present, and visa versa */
+		$this input:not([id]):not([type=hidden]) {
+			attribute(title): required;
+		}
+		
+		$this input:not([title]):not([type=hidden]) {
+			attribute(id): required;
+			
+			label[for=$(attribute(id))$] {
+				required: true;
+			}
+		}
 	}
 }
