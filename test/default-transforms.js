@@ -90,6 +90,9 @@ describe("Default transform function",function() {
 		it("should return the 'length' property of the input",function() {
 			transforms.length({},{"length":12345})
 				.should.equal(12345);
+				
+			transforms.length({},null)
+				.should.equal(0);
 		})
 	});
 	

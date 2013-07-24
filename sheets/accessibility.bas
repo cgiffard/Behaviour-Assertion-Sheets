@@ -56,6 +56,14 @@
 			attribute(height): forbidden;
 		}
 		
+		/*@ At least one header section must be present in each table */
+		$this table {
+			$this th,
+			$this thead {
+				required: true;
+			}
+		}
+		
 		/*@ Banned plugins in content */
 		$this object,
 		$this embed,

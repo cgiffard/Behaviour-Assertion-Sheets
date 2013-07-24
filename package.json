@@ -35,7 +35,7 @@
   "dependencies": {
     "commander": "~1.2.0",
     "simplecrawler": "~0.2.6",
-    "csstree": "git://github.com/cgiffard/CSSTree.git#master",
+    "csstree": "~0.0.2",
     "request": "~2.21.0",
     "yoyaku": "0.0.12",
     "cheerio": "~0.12.0",

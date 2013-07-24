@@ -14,6 +14,13 @@ describe("Default assertion test",function() {
 			
 			tests.title(documentState)
 				.should.equal("Example title to extract");
+				
+			documentState = {
+				"document": cheerio.load("<html></html>")
+			};
+			
+			tests.title(documentState)
+				.should.equal("");
 		});
 	});
 	
@@ -58,6 +65,9 @@ describe("Default assertion test",function() {
 			
 			tests.port(documentState)
 				.should.equal(3000);
+			
+			tests.port({"url":""})
+				.should.equal(80);
 		});
 	});
 
@@ -91,6 +101,9 @@ describe("Default assertion test",function() {
 			
 			tests.query(documentState)
 				.should.equal("stuff=otherstuff");
+			
+			tests.query(documentState,"stuff")
+				.should.equal("otherstuff");
 		});
 	});
 	
@@ -119,6 +132,9 @@ describe("Default assertion test",function() {
 			
 			tests["content-length"](documentState)
 				.should.equal(12345);
+				
+			tests["content-length"]({"res":{}})
+				.should.equal("");
 		});
 	});
 	
@@ -134,6 +150,9 @@ describe("Default assertion test",function() {
 			
 			tests["content-type"](documentState)
 				.should.equal("application/xml+imaginary-format");
+			
+			tests["content-type"]({"res":{}})
+				.should.equal("");
 		});
 	});
 	
@@ -168,6 +187,9 @@ describe("Default assertion test",function() {
 			
 			tests.body(documentState)
 				.should.equal("ABC123");
+			
+			tests.body({"data":null})
+				.should.equal("");
 		});
 	});
 	
@@ -196,6 +218,14 @@ describe("Default assertion test",function() {
 				
 				tests.text(documentState,node)
 					.should.equal("Example title to extract");
+				
+				documentState.document =
+					cheerio.load("<html><node></node></html>");
+				
+				node = documentState.document("node").eq(0);
+				
+				tests.text(documentState,node)
+					.should.equal("");
 			});
 		});
 		
@@ -209,6 +239,14 @@ describe("Default assertion test",function() {
 				
 				tests.html(documentState,node)
 					.should.equal("<strong><em>Example title</em> to extract</strong>");
+				
+				documentState.document =
+					cheerio.load("<html><node></node></html>");
+				
+				node = documentState.document("node").eq(0);
+				
+				tests.html(documentState,node)
+					.should.equal("");
 			});
 		});
 		
@@ -260,6 +298,10 @@ describe("Default assertion test",function() {
 				chai.expect(function() {
 						tests["has-attribute"](documentState,node)
 					}).to.throw(Error);
+				
+				// We should get false back if we don't have a node to check
+				tests["has-attribute"](documentState,null,"missing")
+					.should.be.false;
 			});
 		});
 		
@@ -277,6 +319,10 @@ describe("Default assertion test",function() {
 				// Should return false if we don't get a node
 				tests.depth(documentState)
 					.should.be.false;
+				
+				// Should return zero if we don't get a node
+				tests.depth(documentState,{})
+					.should.equal(1);
 			});
 		});
 		
