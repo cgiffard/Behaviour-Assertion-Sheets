@@ -463,6 +463,10 @@ and accessible from the given URL. Obviously it may make sense to limit the numb
 of pages downloaded: you can do this with the `-l` option:
 
 	bas -vc -l 10 -s mysheet.bas http://mywebsite.com/
+
+You may specify a single numeric range using a simple interpolation:
+	
+	bas -vc -l 10 -s mysheet.bas http://mywebsite.com/node/%{20-500}
 	
 If the `-s` option isn't specified, `bas` will look for the assertion sheet on
 `STDIN`. Therefore, you can cat a file and pipe it to `bas` as well:
@@ -494,6 +498,7 @@ get a list of options by typing `bas -h` at the prompt.)
 * `-q`, `--quiet` Suppress output (prints final report/json only)
 * `-v`, `--verbose` Verbose output
 * `-j`, `--json` Output list of errors/test results as JSON
+* `--csv` Output list of errors/test results as CSV
 
 The exit value from the CLI is equivalent to the number of errors that occurred
 when the test suite was run. If no errors occurred, of course, the exit value is
