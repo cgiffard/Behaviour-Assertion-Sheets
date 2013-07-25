@@ -28,12 +28,12 @@
 		
 		/*@ Banned (invalid) attributes */
 		$this * {
-			attribute(style): forbidden;
-			attribute(alink): forbidden;
 			attribute(align): forbidden;
+			attribute(alink): forbidden;
 			attribute(background): forbidden;
 			attribute(bgcolor): forbidden;
 			attribute(border): forbidden;
+			/*@ Do not set colour or style using HTML. */
 			attribute(color): forbidden;
 			attribute(compact): forbidden;
 			attribute(face): forbidden;
@@ -43,6 +43,8 @@
 			attribute(noshade): forbidden;
 			attribute(nowrap): forbidden;
 			attribute(start): forbidden;
+			/*@ Do not set colour or style using HTML. */
+			attribute(style): forbidden;
 			attribute(text): forbidden;
 			attribute(version): forbidden;
 			attribute(vlink): forbidden;

@@ -20,4 +20,10 @@
 		/*@ Assertion 2 */
 		text: "abc123";
 	}
+	
+	/*@ Selector 3 */
+	selector3 {
+		/*@ Assertion 3 */
+		text: "abc123";
+	}
 }
