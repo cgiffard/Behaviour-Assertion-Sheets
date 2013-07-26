@@ -11,15 +11,21 @@
 		
 		/*@ Image alt-text requirements */
 		$this img {
-			attribute(alt): required, longer-than(5), shorter-than(80);
+			/*@ Alt text missing */
+			attribute(alt): required;
+			/*@ Alt text invalid length */
+			attribute(alt): longer-than(5), shorter-than(80);
+			/*@ Alt text not within readability requirements */
 			attribute(alt).flesch-kincaid-grade-level: lte(9);
 		}
 		
 		/*@ Table semantics */
 		$this table {
 			
+			/*@ Missing table summary */
 			attribute(summary): required;
 			
+			/*@ Table must include header */
 			$node table thead {
 				required: true;
 			}

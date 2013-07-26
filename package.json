@@ -1,7 +1,7 @@
 {
   "name": "bas",
-  "version": "0.0.19",
-  "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for required behaviour.",
+  "version": "0.0.20",
+  "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for client-side integration testing and quality assurance.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha -R spec -t 10000",
