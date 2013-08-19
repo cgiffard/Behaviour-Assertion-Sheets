@@ -42,13 +42,14 @@ describe("Helper function",function() {
 	describe("getNodePath",function() {
 		it("should be able determine the node path, given a node",function() {
 			
-			var $ = cheerio.load("<html><title>Example title <span class='thingo'>test test test<demo><h1>Stuff</h1></demo></span>to extract</title></html>");
+			var $ = cheerio.load("<html><title>Example title <span class='thingo'>test test test<demo><h1 id='blam'>Stuff</h1></demo></span><span></span><span></span>to extract</title></html>");
 			
 			[
 				$("html")[0],
 				$("title")[0],
 				$("span.thingo")[0],
-				$("demo h1")[0]
+				$("demo h1#blam")[0],
+				$("span:nth-of-type(3)")[0]
 			]
 			.forEach(function(node) {
 				
@@ -60,4 +61,22 @@ describe("Helper function",function() {
 			
 		});
 	});
+	
+	describe("getReadableNode",function() {
+		it("should be able generate a readable stub for a node",function() {
+			
+			var node = cheerio.load("<stuff id='stuff' a='b' />")("stuff")[0],
+				readableNode = helpers.getReadableNode(node);
+				
+			readableNode.should.equal("<stuff id=\"stuff\" a=\"b\">");
+			
+			// Undefined node name
+			node.name = undefined;
+			node.attribs = {};
+			readableNode = helpers.getReadableNode(node);
+			
+			readableNode.should.equal("<undef>");
+		});
+	});
+	
 });

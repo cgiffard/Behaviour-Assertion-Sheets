@@ -3,6 +3,9 @@
 	/*@ Check for bad dates */
 	text: !/1 January\,* 1970/ig;
 	
+	/*@ Bad spacing using non-breaking spaces */
+	body: !contains("&nbsp;&nbsp;");
+	
 	/*@ Content region */
 	#content {
 		

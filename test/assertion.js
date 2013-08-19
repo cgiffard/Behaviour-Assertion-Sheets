@@ -1,4 +1,5 @@
-var chai = require("chai");
+var chai = require("chai"),
+	cheerio = require("cheerio");
 	chai.should();
 
 describe("Assertions",function() {
@@ -187,7 +188,7 @@ describe("Assertions",function() {
 			res: {
 				"statusCode": 200
 			}
-		}
+		};
 		
 		assertion.test(documentState,tests).should.be.true;
 		
@@ -232,18 +233,129 @@ describe("Assertions",function() {
 	});
 	
 	it("should export error data correctly",function() {
+		// Successful test
+		var documentState = {
+			res: {
+				"statusCode": 200
+			},
+			url: "http://www.example.com/"
+		},
+		selector = {},
+		node = cheerio.load("<node>")("node")[0];
 		
+		// Real transformation
+		assertion = new Assertion({
+			property: "stuff.flesch-kincaid-grade-level",
+			value: "lte(20)"
+		});
+		
+		var error = assertion.toError(documentState,{
+			"stuff": function() {
+				return "antidisestablishmentarianism";
+			}
+		},node,selector);
+		
+		var expectedMessage = 
+			"stuff.flesch-kincaid-grade-level expects 'lte(20)': " +
+			"Component test 'lte' failed against input '55.6'.";
+		
+		error.forEach(function(error) {
+			error.message.should.be.a("string");
+			error.message.should.equal(expectedMessage);
+			error.should.be.an.instanceOf(AssertionError);
+			error.selector.should.equal(selector);
+			error.node.should.be.a("string");
+			error.node.should.equal("<node>");
+		});
+		
+		// To Error should throw error when not given a test map
+		var error = null;
+		try {
+			var error = assertion.toError(documentState);
+		} catch(e) {
+			error = e;
+		}
+		
+		expect(error).to.be.an.instanceof(Error);
+		
+		// To Error should throw error when not given a document state
+		var error = null;
+		try {
+			var error = assertion.toError();
+		} catch(e) {
+			error = e;
+		}
+		
+		expect(error).to.be.an.instanceof(Error);
 	});
 	
 	it("should permit the addition of annotations",function() {
+		// Successful test
+		var documentState = {},
+			selector = {},
+			node = cheerio.load("<node>")("node")[0],
+			tests = {
+				"stuff": function() {
+					return "antidisestablishmentarianism";
+				}
+			};
 		
+		// Real transformation
+		assertion = new Assertion({
+			property: "stuff.flesch-kincaid-grade-level",
+			value: "lte(20)"
+		});
+		// Set up a nasty cyclical system to test the depth condition
+		assertion.parent = assertion;
+		
+		assertion.addAnnotation("Testing, testing, 123!")
+		
+		var error = assertion.toError(documentState,tests,node,selector)[0];
+		
+		error.annotations.length.should.equal(5);
+		error.annotations.forEach(function(annotation) {
+			annotation.should.equal("Testing, testing, 123!");
+		});
 	});
 	
 	it("should export key data in describe()",function() {
+		assertion = new Assertion({
+			property: "stuff(arg1,arg2).flesch-kincaid-grade-level",
+			value: "lte(20)"
+		});
 		
+		var description = assertion.describe();
+		description[0].should.equal("stuff");
+		description[1].toString().should.equal("arg1,arg2");
+		description[2].toString().should.equal("flesch-kincaid-grade-level");
+		description[3].should.equal("lte(20)");
 	});
 	
 	it("should properly implement toString()",function() {
+		assertion = new Assertion({
+			property: "stuff(arg1,arg2).flesch-kincaid-grade-level(stuff)",
+			value: "lte(20)"
+		});
 		
+		assertion.toString().should
+			.equal("stuff(arg1,arg2).flesch-kincaid-grade-level(stuff): lte(20)");
+			
+		// Assertion with no transforms
+		assertion = new Assertion({
+			property: "stuff",
+			value: "lte(20)"
+		});
+		
+		assertion.toString().should
+			.equal("stuff: lte(20)");
+		
+		// Assertion with no transform arguments
+		assertion = new Assertion({
+			property: "stuff(arg1,arg2).flesch-kincaid-grade-level",
+			value: "lte(20)"
+		});
+		
+		assertion.toString().should
+			.equal("stuff(arg1,arg2).flesch-kincaid-grade-level: lte(20)");
 	});
 });
