@@ -1,4 +1,5 @@
-
+var chai = require("chai");
+	chai.should();
 
 describe("Default transform function",function() {
 	

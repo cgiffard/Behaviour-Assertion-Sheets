@@ -348,12 +348,16 @@ Tests can also be added programatically. [See the API documentation for details.
 *	**header** (header name)
 	Returns the value of the header specified by the argument.
 *	**required**
-	Always returns true.
+	Always returns true. (Use for testing whether a selector matches.)
+*	**exists**
+	Synonym for `required`.
 
 #### Tests which must be executed on nodes (placed in selector blocks)
 
 *	**text**
-	Returns the text from a given node.
+	Returns the (DOM) text from a given node.
+*	**html**
+	Returns the raw html content of a given node.
 *	**attribute** (attribute name)
 	Returns the value of the specified attribute from a given node.
 *	**has-attribute** (attribute name)
