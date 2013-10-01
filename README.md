@@ -734,7 +734,7 @@ To generate current statistics, run `npm run-script coverage` from the Bas direc
 
 ## Licence
 
-Copyright (c) 2012, Christopher Giffard.
+Copyright (c) 2013, Christopher Giffard.
 
 All rights reserved.
 
