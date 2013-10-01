@@ -42,6 +42,10 @@ describe("Rule Sets",function() {
 		String(rule).should.equal("@page: (condition = requirement)");
 		rule = new RuleSet(["@all","(condition = requirement)","(a != b)"]);
 		String(rule).should.equal("@all: (condition = requirement) (a != b)");
+		
+		// When we're not given a kind...
+		rule.kind = null;
+		String(rule).should.equal("@all: (condition = requirement) (a != b)");
 	});
 	
 	it("should be able to accept assertions",function() {
@@ -120,6 +124,12 @@ describe("Rule Sets",function() {
 			.should.equal(true);
 		
 		rule2.validFor(null,{"status-code":function() { return 300; }})
+			.should.equal(false);
+			
+		// Given an unknown kind, validity always fails
+		rule2.kind = "imaginary";
+		rule2.validFor().should.equal(false);
+		rule2.validFor(null,{"status-code":function() { return 200; }})
 			.should.equal(false);
 	});
 });

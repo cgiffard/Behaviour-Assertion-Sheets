@@ -724,10 +724,10 @@ To generate current statistics, run `npm run-script coverage` from the Bas direc
 	</thead>
 	<tbody>
 		<tr>
-			<td>86.09% (458/532)</td>
-			<td>75.19% (203/270)</td>
-			<td>86.4% (108/125)</td>
-			<td>86.96% (440/506)</td>
+			<td>82.86% (551/665)</td>
+			<td>77.51% (286/369)</td>
+			<td>79.86% (115/144)</td>
+			<td>82.78% (519/627)</td>
 		</tr>
 	</tbody>
 </table>
