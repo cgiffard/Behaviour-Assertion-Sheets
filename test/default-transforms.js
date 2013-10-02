@@ -13,6 +13,10 @@ describe("Default transform function",function() {
 			
 			transforms["flesch-kincaid-reading-ease"]({},testInputText)
 				.should.equal(43.4);
+			
+			// Bogus — what we're really testing is that it'll handle null values
+			transforms["flesch-kincaid-reading-ease"]({},null)
+				.should.equal(163.5);
 		});
 	});
 	

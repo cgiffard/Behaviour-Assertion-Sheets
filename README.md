@@ -362,6 +362,8 @@ Tests can also be added programatically. [See the API documentation for details.
 	Returns the value of the specified attribute from a given node.
 *	**has-attribute** (attribute name)
 	Returns true if the specified attribute is present - false if not.
+*	**tag-name**
+	Returns the tag name of a given node.
 *	**count**
 	Returns the number of nodes that matched a given selector.
 	
@@ -443,6 +445,9 @@ can have arguments.
 *	**contains** (expectation)
 	Tests whether the test result as a string contains an exact match for the
 	expectation.
+*	**one-of** (expectation, [expectation...])
+	Tests whether the test result is an exact match for any one of the arguments.
+	Coerces both the arguments and the test result to string before comparison.
 
 ## Bas on the Command Line
 

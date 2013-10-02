@@ -111,4 +111,36 @@ describe("Statement Parser",function() {
 		parser(combinedText)[2].should.equal("bareword(otherbareword())");
 		parser(combinedText)[3].should.equal("!/stuff/");
 	});
+	
+	it("should be able to handle an orphaned escape",function() {
+		var combinedText = "\\";
+		parser(combinedText).length.should.equal(1);
+		parser(combinedText)[0].should.equal("\\");
+	});
+	
+	it("should be able to handle unmatched delimiters",function() {
+		var combinedText = "a'ngus";
+		parser(combinedText).length.should.equal(1);
+		parser(combinedText)[0].should.equal("a'ngus");
+	});
+	
+	it("should be able to handle an empty parse buffer",function() {
+		var combinedText = "";
+		parser(combinedText).length.should.equal(0);
+	});
+	
+	it("should throw out junk input",function() {
+		chai.expect(parser(null)).to.equal(undefined);
+	});
+	
+	it("should throw out junk input",function() {
+		chai.expect(parser(null)).to.equal(undefined);
+	});
+	
+	it("should be able to parse bareword arguments",function() {
+		var args = parser.parseArguments("brain(stuffo, face)")
+		args.length.should.equal(2);
+		args[0].should.equal("brain");
+		String(args[1]).should.equal("stuffo,face");
+	});
 });

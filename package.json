@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for client-side integration testing and quality assurance.",
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,9 @@
     "client-side",
     "crawl",
     "crawler",
-    "assertion"
+    "assertion",
+    "sheets",
+    "bas"
   ],
   "author": "Christopher Giffard <christopher.giffard@cgiffard.com>",
   "license": "BSD",

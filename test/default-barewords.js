@@ -158,4 +158,22 @@ describe("Default bareword",function() {
 			
 		});
 	});
+	
+	describe("one-of",function() {
+		it("should return true if the string input contains an exact match for any one of the argumnents, false if it doesn't",function() {
+			var oneof = barewords["one-of"];
+			
+			oneof("abc123","a","abc123").should.be.true;
+			oneof("abc123","a","1bc123").should.be.false;
+			oneof("fgz","a","1bc123").should.be.false;
+			oneof("fgz","a","1bc123","fgz").should.be.true;
+			oneof("fgz","a","1bc123","fgx").should.be.false;
+			oneof(1,"a","1bc123","fgz",1).should.be.true;
+			oneof(1,"a","1bc123","fgz","1").should.be.true;
+			oneof(["abc","123"],"a","1bc123",["abc","123"],"1").should.be.true;
+			oneof(["abc","123"],"a","1bc123",["abc","231"],"1").should.be.false;
+			oneof(true).should.be.false;
+			oneof(true,true).should.be.true;
+		});
+	});
 });

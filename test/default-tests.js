@@ -205,6 +205,9 @@ describe("Default assertion test",function() {
 				
 				tests.required(documentState,node)
 					.should.equal(true);
+				
+				tests.required(documentState,null)
+					.should.equal(false);
 			});
 		});
 		
@@ -301,6 +304,28 @@ describe("Default assertion test",function() {
 				
 				// We should get false back if we don't have a node to check
 				tests["has-attribute"](documentState,null,"missing")
+					.should.be.false;
+			});
+		});
+		
+		describe("tag-name",function() {
+			it("should return the tag name of a given node",function() {
+				var documentState = {
+					"document": cheerio.load("<html><b></b></html>")
+				};
+				
+				var node = documentState.document("html").eq(0),
+					node2 = documentState.document("b").eq(0);
+				
+				tests["tag-name"](documentState,node)
+					.should.equal("html");
+				
+				tests["tag-name"](documentState,node2)
+					.should.equal("b");
+				
+				
+				// We should get false back if we don't have a node to check
+				tests["tag-name"](documentState,null)
 					.should.be.false;
 			});
 		});
