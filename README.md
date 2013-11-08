@@ -142,6 +142,72 @@ are present.
 Selector blocks can be nested. If a selector block is nested within another, it
 will only be executed should the parent selector match.
 
+##### Scoping in Selectors
+
+When selector blocks are nested, special scoping variables may be used.
+
+###### $this
+
+The scoping variable `$this` maps to the parent selector block's selector string.
+Therefore, consider the following example:
+
+```css
+#content {
+	$this b {
+		/* Hey! */
+	}
+}
+```
+
+The inner selector `$this b` will map to `#content b`.
+
+###### $node
+
+The `$node` scope is similar to `$this` — however it is even more restrictive,
+only searching within the exact node (or nodes) which was/were selected.
+
+```css
+#content header {
+	$node h3 {
+	
+	}
+}
+```
+
+In the above example, `$node h3` is equivalent to a scoped search for `h3` within
+each individual element matching `#content header`.
+
+##### Value Interpolation In Selectors
+
+Selectors may contain values interpolated from test results executed in their
+parent context.
+
+For example, lets say you want to make sure that any element with an
+`aria-describedby` attribute has a matching element ID somewhere on the page.
+
+```css
+/* ARIA attributes */
+$this [aria-describedby] {
+	/*@ WCAG (1.3.1 A, 4.1.1 A, 4.1.2 A) There must be a tag with a matching ID
+		for the aria-describedby attribute */
+	
+	[id=$(attribute(aria-describedby))$] {
+		count: 1;
+		required: true;
+	}
+}
+```
+
+The `$(...)$` construct instructs Bas to execute the string
+`attribute(aria-describedby)` as a test, and return the result, interpolating it
+into the selector.
+
+Therefore, the final interpolated selector might look like:
+
+```css
+[id=image-header]
+```
+
 #### Assertions
 
 An assertion is very similar to a `declaration` in CSS. Fundamentally, it is a
