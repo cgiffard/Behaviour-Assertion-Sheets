@@ -15,7 +15,7 @@
 	body: !contains("&nbsp;&nbsp;");
 
 	/* Content region */
-	#content .region-content {
+	#contentContainer {
 
 		/*@ Text accessibility requirements */
 		/* text.flesch-kincaid-grade-level: lte(9); */
