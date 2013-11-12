@@ -2,3 +2,4 @@ node_modules
 lib-conv
 lib-unconv
 html-report
+npm-debug.log

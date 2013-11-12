@@ -143,4 +143,25 @@ describe("Statement Parser",function() {
 		args[0].should.equal("brain");
 		String(args[1]).should.equal("stuffo,face");
 	});
+	
+	describe("Utility function trim",function() {
+		it("should be able to trim quotes from arguments",function() {
+			var components = ["'test'","\"test\"","'test a b c'","\"test a b c\""],
+				expectation = ["test","test","test a b c","test a b c"],
+				trimmed = parser.trim(components);
+			
+			trimmed.forEach(function(arg,index) {
+				arg.should.equal(expectation[index]);
+			});
+		});
+		
+		it("should not trim quotes from unbalanced arguments",function() {
+			var components = ["'test","\"test","test'","test\""],
+				trimmed = parser.trim(components);
+			
+			components.forEach(function(arg,index) {
+				arg.should.equal(trimmed[index]);
+			});
+		});
+	})
 });

@@ -125,11 +125,86 @@ describe("Rule Sets",function() {
 		
 		rule2.validFor(null,{"status-code":function() { return 300; }})
 			.should.equal(false);
-			
+		
 		// Given an unknown kind, validity always fails
 		rule2.kind = "imaginary";
 		rule2.validFor().should.equal(false);
 		rule2.validFor(null,{"status-code":function() { return 200; }})
 			.should.equal(false);
+	});
+	
+	it("should determine validity for domain rules",function() {
+		var rule3 = new RuleSet(["@page","(domain = abc.com)"]);
+		
+		// Domain check should function correctly
+		rule3.validFor(null,
+			{ 	"domain":	function() { return "abc.com"; } })
+				.should.equal(true);
+		rule3.validFor(null,
+			{ 	"domain":	function() { return "def.com"; } })
+				.should.equal(false);
+		rule3.validFor(null,
+			{ 	"domain":	function() { return "def.abc.com"; } })
+				.should.equal(false);
+	});
+	
+	it("should determine validity for multiple rules",function() {
+		var rule4 = new RuleSet(["@page","(domain = abc.com)","(path = /)"]);
+		
+		rule4.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+			 	"path": 	function() { return "/"; } })
+				.should.equal(true);
+		rule4.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/"; } })
+				.should.equal(false);
+		rule4.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
+		rule4.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
+	});
+	
+	it("should determine validity for multiple quoted rules",function() {
+		var rule5 = new RuleSet(["@page","(domain = \"abc.com\")","(path = \"/\")"]),
+			rule6 = new RuleSet(["@page","(domain = 'abc.com')","(path = '/')"]);
+		
+		rule5.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+			 	"path": 	function() { return "/"; } })
+				.should.equal(true);
+		rule5.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/"; } })
+				.should.equal(false);
+		rule5.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
+		rule5.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
+		
+		rule6.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+				"path": 	function() { return "/"; } })
+				.should.equal(true);
+		rule6.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/"; } })
+				.should.equal(false);
+		rule6.validFor(null,
+			{	"domain":	function() { return "abc.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
+		rule6.validFor(null,
+			{	"domain":	function() { return "def.com"; },
+			 	"path": 	function() { return "/def"; } })
+				.should.equal(false);
 	});
 });
