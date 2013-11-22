@@ -575,6 +575,8 @@ get a list of options by typing `bas -h` at the prompt.)
 * `-j`, `--json` Output list of errors/test results as JSON
 * `--csv` Output list of errors/test results as CSV
 * `--noquery` Don't download resources with query strings
+* `-u`, `--username <username>` Username for HTTP Basic Auth (crawl)
+* `-p`, `--password <password>` Password for HTTP Basic Auth (crawl)
 
 The exit value from the CLI is equivalent to the number of errors that occurred
 when the test suite was run. If no errors occurred, of course, the exit value is
