@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "commander": "~2.0.0",
-    "simplecrawler": "~0.3.4",
+    "simplecrawler": "~0.3.6",
     "csstree": "git+https://github.com/cgiffard/CSSTree.git#inline-comments",
     "request": "~2.27.0",
     "yoyaku": "0.0.12",
