@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for client-side integration testing and quality assurance.",
   "main": "lib/index.js",
   "scripts": {
