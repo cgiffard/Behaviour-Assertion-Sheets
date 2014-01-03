@@ -29,18 +29,18 @@
   "license": "BSD",
   "devDependencies": {
     "chai": "~1.8.0",
-    "mocha": "~1.13.0",
-    "jshint": "~2.1.11",
+    "mocha": "~1.16.2",
+    "jshint": "~2.4.0",
     "mocha-istanbul": "~0.2.0",
-    "istanbul": "~0.1.37"
+    "istanbul": "~0.2.3"
   },
   "dependencies": {
-    "commander": "~2.0.0",
+    "commander": "~2.1.0",
     "simplecrawler": "~0.3.6",
     "csstree": "git+https://github.com/cgiffard/CSSTree.git#inline-comments",
-    "request": "~2.27.0",
+    "request": "~2.30.0",
     "yoyaku": "0.0.12",
-    "cheerio": "~0.12.0",
+    "cheerio": "~0.13.0",
     "colors": "~0.6.0-1",
     "async": "~0.2.8",
     "text-statistics": "~0.1.1"
