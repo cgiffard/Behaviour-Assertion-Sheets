@@ -1,6 +1,6 @@
 {
   "name": "bas",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Behaviour Assertion Sheets: CSS-like declarative syntax for client-side integration testing and quality assurance.",
   "main": "lib/index.js",
   "scripts": {
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "commander": "~2.1.0",
-    "simplecrawler": "~0.3.6",
+    "simplecrawler": "~0.3.7",
     "csstree": "git+https://github.com/cgiffard/CSSTree.git#inline-comments",
     "request": "~2.30.0",
     "yoyaku": "0.0.12",
