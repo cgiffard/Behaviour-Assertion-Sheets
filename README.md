@@ -39,8 +39,7 @@ via the [node.js API](#bas-nodejs-api).
 As mentioned earlier, the Bas syntax looks very similar to (and nearly even parses as)
 CSS. Here are the major components:
 
-![Major components of the Bas syntax, as described by the list below.]
-(http://cgiffard.com/github/bas/bas-diagram.png)
+![Major components of the Bas syntax, as described by the list below.](http://cgiffard.com/github/bas/bas-diagram.png)
 
 (You can work this out yourself and just want to skip to the goods?
 [Jump to syntax example.](#bas-example))
